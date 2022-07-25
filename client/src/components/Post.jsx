@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { lighten } from '../utils/styleMethods';
+import axios from 'axios'; 
 
 const ArticleWrapper = styled.article`
   border: 1px solid lightgray;
@@ -25,14 +26,39 @@ const ArticleWrapper = styled.article`
   }
 `;
 
+const urlBase = 'http://localhost:3001';
+
 const Post = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getPosts()
+      .then(({ data: posts }) => setPosts(posts.reverse()))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const getPosts = () => {
+    return axios.get(`${urlBase}/posts`);
+  };
 
   return (
-    <ArticleWrapper >
-      <section>
-        <p>POSTS</p>
-      </section>
-    </ArticleWrapper>
+    <main>
+      <h2>View Posts:</h2>
+      {posts ? (
+        <section className="posts">
+          {posts.map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
+        </section>
+      ) : (
+        <section className="noPosts">
+          <h2>
+            There are no posts yet. You should{' '}
+            <div to="/add">go add one!</div>{' '}
+          </h2>
+        </section>
+      )}
+    </main>
   );
 };
 
