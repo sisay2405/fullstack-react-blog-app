@@ -1,0 +1,42 @@
+{
+    "posts": [
+      { 
+        "id": 1, 
+        "title": "", 
+        "text": "",
+        "category": "",
+        "author": "",
+        "date": ""
+      },
+      { 
+        "id": 2, 
+        "title": "", 
+        "text": "",
+        "category": "",
+        "author": "",
+        "date":""
+      },
+      { 
+        "id": 3, 
+        "title": "", 
+        "text": "",
+        "category": "",
+        "author": "" ,
+        "date": ""
+      }
+    ],
+    "category": [
+        {
+          "id": 1,
+          "catergory-type":""
+        },
+        {
+          "id": 2,
+          "catergory-type":""
+        },
+        {
+          "id": 3,
+          "catergory-type":""
+        }
+    ]
+}
