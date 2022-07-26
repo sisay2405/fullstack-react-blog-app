@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
+import styled from 'styled-components';
+import { Gif } from '../../types/index';
 import { lighten } from '../../utils/styleMethods';
-import { Gif } from '../../types';
 
-const ArticleWrapper = styled.article`
+const CardWrapper = styled.article`
   border: 1px solid lightgray;
   border-radius: 10px;
   margin-bottom: 1rem;
@@ -29,29 +29,37 @@ const ArticleWrapper = styled.article`
 
 const urlBase = 'http://localhost:3001';
 
-const getPosts = () => {
-  return axios.get(`${urlBase}/posts`);
-};
-
 const Post = () => {
   const [posts, setPosts] = useState<Gif[]>([]);
 
+  const getPosts = async () => {
+    try {
+      const { data: apiResults } = await axios.get(`${urlBase}/posts`);
+      setPosts(apiResults);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    getPosts()
-      .then(({ data: posts }) => setPosts(posts.reverse()))
-      .catch((err) => console.log(err));
+    getPosts();
   }, []);
 
   return (
     <>
       <h2>View Posts:</h2>
-      {posts ? (
+      {posts.length ? (
         <section className="posts">
-          {posts.map((post) => (
-            <Post
-              post={post}
-            />
-          ))}
+          {( posts.map(({ id, title, text, category, author, date }: Gif) =>
+            <CardWrapper>
+              <h3>{title}</h3>
+              <section>
+                {text.slice(0, 500)}...
+                {author}
+                {date}
+                <p>Read More from the post &#39;{title}&#39;...</p>
+              </section>
+            </CardWrapper>))}
         </section>
       ) : (
         <section className="noPosts">
@@ -61,7 +69,6 @@ const Post = () => {
           </h2>
         </section>
       )}
-      hello
     </>
   );
 };
