@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks'],
   rules: {
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'linebreak-style': 0,
     'no-alert': 'off',
     'no-console': 'off',
