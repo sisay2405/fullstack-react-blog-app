@@ -1,10 +1,11 @@
 import React from 'react';
+import Post from '../components/Post/Post';
 
 const Posts = () => {
 
   return (
     <main>
-      <h3>RECENT POSTS:</h3>
+      <Post/>
     </main>
   );
 };

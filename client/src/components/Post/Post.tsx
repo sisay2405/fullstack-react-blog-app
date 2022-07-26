@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { lighten } from '../utils/styleMethods';
-import axios from 'axios'; 
+import axios from 'axios';
+import { lighten } from '../../utils/styleMethods';
+import { Gif } from '../../types';
 
 const ArticleWrapper = styled.article`
   border: 1px solid lightgray;
@@ -28,8 +29,12 @@ const ArticleWrapper = styled.article`
 
 const urlBase = 'http://localhost:3001';
 
+const getPosts = () => {
+  return axios.get(`${urlBase}/posts`);
+};
+
 const Post = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Gif[]>([]);
 
   useEffect(() => {
     getPosts()
@@ -37,28 +42,27 @@ const Post = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const getPosts = () => {
-    return axios.get(`${urlBase}/posts`);
-  };
-
   return (
-    <main>
+    <>
       <h2>View Posts:</h2>
       {posts ? (
         <section className="posts">
           {posts.map((post) => (
-            <Post key={post.id} post={post} />
+            <Post
+              post={post}
+            />
           ))}
         </section>
       ) : (
         <section className="noPosts">
           <h2>
             There are no posts yet. You should{' '}
-            <div to="/add">go add one!</div>{' '}
+            <div>go add one!</div>{' '}
           </h2>
         </section>
       )}
-    </main>
+      hello
+    </>
   );
 };
 
