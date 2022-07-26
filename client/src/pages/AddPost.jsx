@@ -26,11 +26,10 @@ const FormWrapper = styled.form`
 `;
 
 const AddPost = () => {
-  
   return (
     <main>
       <h3>Add Post:</h3>
-      <FormWrapper >
+      <FormWrapper>
         Add more Post
       </FormWrapper>
     </main>
