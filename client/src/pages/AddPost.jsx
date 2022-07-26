@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 const FormWrapper = styled.form`
   label {
     display: block;
     font-weight: 700;
     padding-bottom: 0.5rem;
-    }
+  }
   input {
     margin-bottom: 2rem;
   }
@@ -26,11 +27,19 @@ const FormWrapper = styled.form`
 `;
 
 const AddPost = () => {
+  // const dispatch = useDispatch();
+  // const userData = useSelector((state) => state.addPost.value);
   return (
     <main>
       <h3>Add Post:</h3>
       <FormWrapper>
-        Add more Post
+        <div>
+          <input type="text" placeholder="post Tittle Here" />
+          <textarea type="text" placeholder="post text Here" />
+          <input type="text" placeholder="Select catagory" />
+          <button type="submit">Add post</button>
+        </div>
+
       </FormWrapper>
     </main>
   );
