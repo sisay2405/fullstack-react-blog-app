@@ -6,7 +6,7 @@ const FormWrapper = styled.form`
     display: block;
     font-weight: 700;
     padding-bottom: 0.5rem;
-  }
+    }
   input {
     margin-bottom: 2rem;
   }
@@ -26,11 +26,10 @@ const FormWrapper = styled.form`
 `;
 
 const AddPost = () => {
-  
   return (
     <main>
       <h3>Add Post:</h3>
-      <FormWrapper >
+      <FormWrapper>
         Add more Post
       </FormWrapper>
     </main>
