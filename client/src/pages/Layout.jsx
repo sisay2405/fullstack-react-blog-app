@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import GlobalStyle from '../utils/globalStyle';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import CatagoryBar from '../components/CatagoryBar';
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,13 +31,22 @@ const Wrapper = styled.div`
 }
 `;
 
+const CatagoryWrapper = styled.div`
+display: flex;
+flex-direction: row;
+height: 100vh;
+
+`;
 const Layout = () => {
   return (
     <>
       <GlobalStyle />
       <Wrapper>
         <Header />
-        <Outlet />
+        <CatagoryWrapper>
+          <Outlet />
+          <CatagoryBar />
+        </CatagoryWrapper>
         <Footer />
       </Wrapper>
     </>

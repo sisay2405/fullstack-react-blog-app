@@ -26,9 +26,8 @@ const ArticleWrapper = styled.article`
 `;
 
 const Post = () => {
-
   return (
-    <ArticleWrapper >
+    <ArticleWrapper>
       <section>
         <p>POSTS</p>
       </section>
