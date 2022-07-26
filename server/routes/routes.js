@@ -17,10 +17,6 @@ router.post('/post', async (req, res) => {
         res.status(400).json({message: error.message})
     }
 })
-//Post Method
-// router.post('/post', (req, res) => {
-//     res.send('Post API')
-// })
 
 //Get all Method
 // router.get('/getAll', (req, res) => {
@@ -70,10 +66,7 @@ router.patch('/update/:id', async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 })
-//Delete by ID Method
-// router.delete('/delete/:id', (req, res) => {
-//     res.send('Delete by ID API')
-// })
+
 //Delete by ID Method
 router.delete('/delete/:id', async (req, res) => {
     try {
