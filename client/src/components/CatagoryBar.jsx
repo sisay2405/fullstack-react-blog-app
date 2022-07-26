@@ -46,7 +46,7 @@ const CatagoryBar = () => {
             placeholder="Catagory Name"
           />
         </div>
-        <button type="submit">ADD CATAGORY</button>
+        <button type="submit">ADD.. CATAGORY</button>
       </form>
     </Catagorywrapperr>
   );
