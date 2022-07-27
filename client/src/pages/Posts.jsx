@@ -3,11 +3,6 @@ import Post from '../components/Post/Post.tsx';
 import AddPost from './AddPost';
 
 const Posts = () => {
-  // const [myCar, setMyCar] = useState("Volvo");
-
-  // const handleChange = (event) => {
-  //   setMyCar(event.target.value)
-  // }
   return (
     <main>
       <Post />
