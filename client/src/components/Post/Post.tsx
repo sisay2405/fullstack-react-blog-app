@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { Gif } from '../../types/index';
+import { Gif } from '../../types';
 import { lighten } from '../../utils/styleMethods';
 
 const CardWrapper = styled.article`
