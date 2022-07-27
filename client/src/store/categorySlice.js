@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserData } from '../../db.json';
 
-export const PostSlice = createSlice({
+export const categorySlice = createSlice({
   name: 'post',
   initialState: {
-    value: UserData
+    value: ''
   },
   reducers: {
     addposts: (state, actions) => {
@@ -13,4 +12,4 @@ export const PostSlice = createSlice({
   },
 });
 
-export default PostSlice.reducer;
+export default categorySlice.reducer;

@@ -1,5 +1,6 @@
 import React from 'react';
-import Post from '../components/Post/Post.tsx';
+// eslint-disable-next-line import/extensions
+import Post from '../components/Post/Post';
 import AddPost from './AddPost';
 
 const Posts = () => {
