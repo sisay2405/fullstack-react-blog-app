@@ -7,7 +7,7 @@ const Posts = () => {
     <main>
       <Post />
       <h3>RECENT POSTS:</h3>
-      <AddPost />
+      {/* <AddPost /> */}
     </main>
   );
 };
