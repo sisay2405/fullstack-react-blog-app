@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { lighten } from '../utils/styleMethods';
+import { Gif } from '../../types';
+import { lighten } from '../../utils/styleMethods';
 
-const ArticleWrapper = styled.article`
+const CardWrapper = styled.article`
   border: 1px solid lightgray;
   border-radius: 10px;
   margin-bottom: 1rem;
@@ -23,16 +24,12 @@ const ArticleWrapper = styled.article`
     color: #0000ff;
     text-decoration: underline;
   }
-`;
+`; 
 
-const Post = () => {
+function PostCard() {
   return (
-    <ArticleWrapper>
-      <section>
-        <p>POSTS</p>
-      </section>
-    </ArticleWrapper>
-  );
-};
+    <h4>hello</h4>
+  )
+}
 
-export default Post;
+export default PostCard
