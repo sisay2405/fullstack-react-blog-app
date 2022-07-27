@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { addposts } from '../store/addPostSlice';
+import { addPosts } from '../store/addPostSlice';
 
 const FormWrapper = styled.form`
   label {
@@ -30,15 +30,18 @@ const FormWrapper = styled.form`
 const AddPost = () => {
   const dispatch = useDispatch();
   // const userData = useSelector((state) => state.addPost.value);
-  useEffect(() => {
-    dispatch(addposts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(addPosts());
+  // }, []);
+  // cons onSubmit = (e) => {
+  //   dispatch(addPosts(put the add post object ))
+  // }
 
   return (
 
     <main>
       <h3>Add Post:</h3>
-      <FormWrapper>
+      <FormWrapper onSubmit={() => dispatch(addPosts())}>
         <div>
           <input type="text" placeholder="post Tittle Here" />
           <textarea type="text" placeholder="post text Here" />

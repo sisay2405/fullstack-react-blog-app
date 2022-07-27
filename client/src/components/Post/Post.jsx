@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getPosts } from '../../store/postSlice';
 import { lighten } from '../../utils/styleMethods';
+import { addPosts } from '../../store/addPostSlice';
 
 const CardWrapper = styled.article`
   border: 1px solid lightgray;
@@ -29,11 +30,12 @@ const CardWrapper = styled.article`
 
 const Post = () => {
   const postsData = useSelector((state) => state.posts.value);
+  const reload = useSelector((state) => state.addposts.reload);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, []);
+  }, [reload]);
 
   return (
     <>
