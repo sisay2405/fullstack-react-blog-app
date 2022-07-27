@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import themeReducer from './addpostSlice';
+import postReducer from './postSlice';
+import categoryReducer from './categorySlice';
 
 export default configureStore({
   reducer: {
-    theme: themeReducer,
-
+    posts: postReducer,
+    categories: categoryReducer
   },
 });
