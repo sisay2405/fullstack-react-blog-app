@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addposts } from '../store/addPostSlice';
 
 const FormWrapper = styled.form`
   label {
@@ -27,9 +28,14 @@ const FormWrapper = styled.form`
 `;
 
 const AddPost = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const userData = useSelector((state) => state.addPost.value);
+  useEffect(() => {
+    dispatch(addposts());
+  }, []);
+
   return (
+
     <main>
       <h3>Add Post:</h3>
       <FormWrapper>
