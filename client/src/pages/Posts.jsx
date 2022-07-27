@@ -1,5 +1,6 @@
 import React from 'react';
-import Post from '../components/Post/Post.tsx';
+// eslint-disable-next-line import/extensions
+import Post from '../components/Post/Post.jsx';
 import AddPost from './AddPost';
 
 const Posts = () => {
@@ -7,7 +8,7 @@ const Posts = () => {
     <main>
       <Post />
       <h3>RECENT POSTS:</h3>
-      <AddPost />
+      {/* <AddPost /> */}
     </main>
   );
 };

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Gif } from '../../types/index';
+import { getPosts } from '../../store/postSlice';
 import { lighten } from '../../utils/styleMethods';
 
 const CardWrapper = styled.article`
@@ -27,30 +27,20 @@ const CardWrapper = styled.article`
   }
 `;
 
-const urlBase = 'http://localhost:3001';
-
 const Post = () => {
-  const [posts, setPosts] = useState<Gif[]>([]);
-
-  const getPosts = async () => {
-    try {
-      const { data: apiResults } = await axios.get(`${urlBase}/posts`);
-      setPosts(apiResults);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const postsData = useSelector((state) => state.posts.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getPosts();
+    dispatch(getPosts());
   }, []);
 
   return (
     <>
       <h2>View Posts:</h2>
-      {posts.length ? (
+      {postsData.length ? (
         <section className="posts">
-          {( posts.map(({ id, title, text, category, author, date }: Gif) =>
+          {(postsData.map(({ title, text, author, date }) => (
             <CardWrapper>
               <h3>{title}</h3>
               <section>
@@ -59,7 +49,8 @@ const Post = () => {
                 {date}
                 <p>Read More from the post &#39;{title}&#39;...</p>
               </section>
-            </CardWrapper>))}
+            </CardWrapper>
+          )))}
         </section>
       ) : (
         <section className="noPosts">
