@@ -1,8 +1,9 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-let oldList = [];
+let allList = [];
 export const getPosts = createAsyncThunk(
   'post/getPosts',
   async () => {
@@ -22,21 +23,13 @@ export const PostSlice = createSlice({
 
   reducers: {
     setSelectedCategory(state, { payload }) {
-      // state.selectedCategory = payload;
-      // if (payload !== 'all') {
-      //   oldList = state.value;
-      // }
-      // const oldList = state.value;
+      state.value = allList;
 
-      if (payload === 'all') {
-        state.value = oldList;
+      if (payload != 'all') {
+        const existingPosts = (state.value);
+        const newPosts = [...existingPosts].filter((postObj) => postObj.category == payload);
+        state.value = newPosts;
       }
-      // console.log(payload);
-      // console.log('state', current(state));
-      state.value = [current(...state.value)].filter((item) => {
-        console.log('Item', item);
-        return item.category === payload;
-      });
     }
   },
   extraReducers(builder) {
@@ -47,7 +40,7 @@ export const PostSlice = createSlice({
       .addCase(getPosts.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.value = payload;
-        oldList = state.value;
+        allList = state.value;
       })
       .addCase(getPosts.rejected, (state) => {
         state.error = true;

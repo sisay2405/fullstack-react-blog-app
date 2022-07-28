@@ -44,37 +44,29 @@ width:300px;
   }
 `;
 const CatagoryBar = () => {
-  const [selectedCategoryed, setSelectedCategoryed] = useState([]);
+  const [selectedCategoryed, setSelectedCategoryed] = useState('all');
   const postsData = useSelector((state) => state.posts.value);
   const dispatch = useDispatch();
-  // const { selectedCategory } = useSelector(
-  //   (state) => state.post,
-  //   shallowEqual
-  // );
-  // useEffect(() => {
-  //   dispatch(getPosts());
-  // }, []);
-  // function getFilteredList() {
-  //   if (!selectedCategoryed) {
-  //     return postsData;
-  //   }
-  //   return postsData.filter((item) => item.category === selectedCategoryed);
-  // }
 
+  // how to use useMemo hook
   // const filteredList = useMemo(getFilteredList, [selectedCategoryed, postsData]);
 
   function handleCategoryChange(event) {
     event.preventDefault();
-    setSelectedCategoryed(event.target.value);
     dispatch(setSelectedCategory(selectedCategoryed));
-    // filteredList();
   }
+
+  const handleOnChange = (e) => {
+    console.log('SISAY SELECTED THIS CATEGORY:', e.target.value);
+    setSelectedCategoryed(e.target.value);
+  };
+
   return (
     <Catagorywrapperr>
       <h3>VIEW CATEGORY</h3>
       <form onSubmit={handleCategoryChange}>
         <div className="CatagoryInput">
-          <select>
+          <select onChange={handleOnChange}>
             <option value="all">All</option>
             <option value="pirate">Pirate</option>
             <option value="cat">Cat</option>
@@ -83,20 +75,6 @@ const CatagoryBar = () => {
         </div>
         <button type="submit">VIEW CATAGORY POSTS</button>
       </form>
-      {/* <div className="sport-list">
-        {(filteredList.map(({ title, text, author, date }) => (
-          <CardWrapper>
-            <h3>{title}</h3>
-            <section>
-              {text.slice(0, 100)}...
-              {author}
-              {date}
-              <p>Read More from the post &#39;{title}&#39;...</p>
-            </section>
-          </CardWrapper>
-        )))}
-      </div> */}
-
       <h3>ADD A CATEGORY</h3>
       <form>
         <div className="CatagoryInput">
