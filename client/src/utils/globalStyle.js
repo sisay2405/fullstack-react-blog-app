@@ -16,6 +16,39 @@ const GlobalStyle = createGlobalStyle`
       width: 150px;
     }
   }
+  .item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid black;
+  }
+  .item-label {
+    font-weight: 600;
+    margin-right: 8px;
+  }
+  .app {
+    font-family: sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #category-list {
+    padding: 5px;
+  }
+  .sport-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
 `;
 
 export default GlobalStyle;

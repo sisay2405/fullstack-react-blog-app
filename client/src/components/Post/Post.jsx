@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getPosts } from '../../store/postSlice';
@@ -26,15 +26,28 @@ const CardWrapper = styled.article`
     text-decoration: underline;
   }
 `;
-
+const Catagorywrapperr = styled.footer`
+  color: #fefefe;
+  padding: 1rem 0;
+  margin-right: 100px;
+  text-align: center;
+  .CatagoryInput{
+    width: 100px;
+  }
+  button {
+    margin: 0.25rem 0;
+    width: 100%;
+  }
+  h3{
+    color:black;
+  }
+`;
 const Post = () => {
   const postsData = useSelector((state) => state.posts.value);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getPosts());
   }, []);
-
   return (
     <>
       <h2>View Posts:</h2>
