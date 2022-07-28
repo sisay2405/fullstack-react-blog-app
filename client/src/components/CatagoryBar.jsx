@@ -1,33 +1,30 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import axios from 'axios';
 import styled from 'styled-components';
 import { getPosts } from '../store/postSlice';
-import { getCatagory, setCatagory } from '../store/categorySlice';
 import { lighten } from '../utils/styleMethods';
 
 const Catagorywrapperr = styled.footer`
   color: #fefefe;
   padding: 1rem 0;
-  margin-right: 100px;
+  margin-left: 100px;
   text-align: center;
   .CatagoryInput{
-    width: 100px;
+    width: 400px;
   }
   button {
     margin: 0.25rem 0;
-    width: 100%;
+    width: 300px;
   }
   h3{
     color:black;
   }
 `;
 const CardWrapper = styled.article`
+width:300px;
   border: 1px solid lightgray;
   border-radius: 10px;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
   padding: 1.5rem;
   white-space: pre-line;
   &:hover {
@@ -81,9 +78,6 @@ const CatagoryBar = () => {
       </form>
       <button type="submit">VIEW CATAGORY POSTS</button>
       <div className="sport-list">
-        {/* {filteredList.map((element, index) => (
-          <Item {...element} key={index} />
-        ))} */}
         {(filteredList.map(({ title, text, author, date }) => (
           <CardWrapper>
             <h3>{title}</h3>

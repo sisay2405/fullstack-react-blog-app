@@ -86,48 +86,6 @@ const Post = () => {
           </h2>
         </section>
       )}
-      <Catagorywrapperr>
-        <h3>VIEW CATEGORY</h3>
-        <form onChange={handleCategoryChange}>
-          <div className="CatagoryInput">
-            <select>
-              <option value="">All</option>
-              <option value="pirate">Pirate</option>
-              <option value="cat">Cat</option>
-              <option value="hackathon">Hackathon</option>
-            </select>
-          </div>
-        </form>
-        <button type="submit">VIEW CATAGORY POSTS</button>
-        <div className="sport-list">
-          {/* {filteredList.map((element, index) => (
-          <Item {...element} key={index} />
-        ))} */}
-          {(filteredList.map(({ title, text, author, date }) => (
-            <CardWrapper>
-              <h3>{title}</h3>
-              <section>
-                {text.slice(0, 100)}...
-                {author}
-                {date}
-                <p>Read More from the post &#39;{title}&#39;...</p>
-              </section>
-            </CardWrapper>
-          )))}
-        </div>
-
-        <h3>ADD A CATEGORY</h3>
-        <form>
-          <div className="CatagoryInput">
-            <input
-              type="text"
-              id="searchTerm"
-              placeholder="Catagory Name"
-            />
-          </div>
-          <button type="submit">ADD.. CATAGORY</button>
-        </form>
-      </Catagorywrapperr>
     </>
   );
 };
