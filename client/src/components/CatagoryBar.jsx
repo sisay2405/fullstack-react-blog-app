@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
-import { getPosts } from '../store/postSlice';
+import { getPosts, setSelectedCategory } from '../store/postSlice';
 import { lighten } from '../utils/styleMethods';
 
 const Catagorywrapperr = styled.footer`
@@ -44,40 +44,46 @@ width:300px;
   }
 `;
 const CatagoryBar = () => {
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategoryed, setSelectedCategoryed] = useState([]);
   const postsData = useSelector((state) => state.posts.value);
   const dispatch = useDispatch();
+  // const { selectedCategory } = useSelector(
+  //   (state) => state.post,
+  //   shallowEqual
+  // );
+  // useEffect(() => {
+  //   dispatch(getPosts());
+  // }, []);
+  // function getFilteredList() {
+  //   if (!selectedCategoryed) {
+  //     return postsData;
+  //   }
+  //   return postsData.filter((item) => item.category === selectedCategoryed);
+  // }
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, []);
-  function getFilteredList() {
-    if (!selectedCategory) {
-      return postsData;
-    }
-    return postsData.filter((item) => item.category === selectedCategory);
-  }
-
-  const filteredList = useMemo(getFilteredList, [selectedCategory, postsData]);
+  // const filteredList = useMemo(getFilteredList, [selectedCategoryed, postsData]);
 
   function handleCategoryChange(event) {
-    setSelectedCategory(event.target.value);
+    event.preventDefault();
+    setSelectedCategoryed(event.target.value);
+    dispatch(setSelectedCategory(selectedCategoryed));
+    // filteredList();
   }
   return (
     <Catagorywrapperr>
       <h3>VIEW CATEGORY</h3>
-      <form onChange={handleCategoryChange}>
+      <form onSubmit={handleCategoryChange}>
         <div className="CatagoryInput">
           <select>
-            <option value="">All</option>
+            <option value="all">All</option>
             <option value="pirate">Pirate</option>
             <option value="cat">Cat</option>
             <option value="hackathon">Hackathon</option>
           </select>
         </div>
+        <button type="submit">VIEW CATAGORY POSTS</button>
       </form>
-      <button type="submit">VIEW CATAGORY POSTS</button>
-      <div className="sport-list">
+      {/* <div className="sport-list">
         {(filteredList.map(({ title, text, author, date }) => (
           <CardWrapper>
             <h3>{title}</h3>
@@ -89,7 +95,7 @@ const CatagoryBar = () => {
             </section>
           </CardWrapper>
         )))}
-      </div>
+      </div> */}
 
       <h3>ADD A CATEGORY</h3>
       <form>

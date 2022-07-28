@@ -45,22 +45,9 @@ const Catagorywrapperr = styled.footer`
 const Post = () => {
   const postsData = useSelector((state) => state.posts.value);
   const dispatch = useDispatch();
-  const [selectedCategory, setSelectedCategory] = useState();
   useEffect(() => {
     dispatch(getPosts());
   }, []);
-  function getFilteredList() {
-    if (!selectedCategory) {
-      return postsData;
-    }
-    return postsData.filter((item) => item.category === selectedCategory);
-  }
-
-  const filteredList = useMemo(getFilteredList, [selectedCategory, postsData]);
-
-  function handleCategoryChange(event) {
-    setSelectedCategory(event.target.value);
-  }
   return (
     <>
       <h2>View Posts:</h2>
