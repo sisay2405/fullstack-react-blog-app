@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+.app {
+  font-family: sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#category-list {
+  padding: 5px;
+}
+.sport-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}

@@ -1,13 +1,13 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-param-reassign */
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const urlBase = 'http://localhost:3001';
-
+let allList = [];
 export const getPosts = createAsyncThunk(
   'post/getPosts',
   async () => {
-    const { data: apiResults } = await axios.get(`${urlBase}/posts`);
+    const { data: apiResults } = await axios.get('/posts');
     console.log('API RESULTS:', apiResults);
     return apiResults;
   }
@@ -20,7 +20,17 @@ export const PostSlice = createSlice({
     loading: false,
     error: false,
   },
+
   reducers: {
+    setSelectedCategory(state, { payload }) {
+      state.value = allList;
+
+      if (payload != 'all') {
+        const existingPosts = (state.value);
+        const newPosts = [...existingPosts].filter((postObj) => postObj.category == payload);
+        state.value = newPosts;
+      }
+    }
   },
   extraReducers(builder) {
     builder
@@ -30,11 +40,12 @@ export const PostSlice = createSlice({
       .addCase(getPosts.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.value = payload;
+        allList = state.value;
       })
       .addCase(getPosts.rejected, (state) => {
         state.error = true;
       });
   }
 });
-
+export const { setSelectedCategory } = PostSlice.actions;
 export default PostSlice.reducer;
