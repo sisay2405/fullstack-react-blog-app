@@ -1,35 +1,34 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios  from 'axios';
-const addpost= {title:"ermias",text:"new",category:"cars",author:"frankie",date:"today",id:2}
-const urlBase = 'http://localhost:3001';
+import axios from 'axios';
+
 export const addposts = createAsyncThunk(
-  'add/addposts',
-  async () => {
-    const posts = await axios.post(`${urlBase}/posts`,addpost)
-    return posts
+  'addposts',
+  async ({ title, text, catagory }) => {
+    try {
+      const posts = await axios.post('http://localhost:3001/posts', {
+        title,
+        text,
+        catagory,
+      });
+      return posts.data;
+    } catch (err) {
+      console.log(`Erorr!:${err}`);
+    }
   }
 );
+
 export const addPostSlice = createSlice({
   name: 'addposts',
-  initialState:{
-    title: '', 
+  initialState: {
+    title: '',
     text: '',
-    category:'',
-    author: '',
-    date:'',
+    category: '',
+    reload: false,
     loading: false,
     error: false,
   },
   reducers: {
-    // setTitle(state, { payload }) {
-    //   state.title = payload;
-    // }, setText(state, { payload }) {
-    //   state.text = payload;
-    // }, setCategory(state, { payload }) {
-    //   state.category = payload;
-    // }, setAuthor(state, { payload }) {
-    //   state.author = payload;
-    // },
   },
   extraReducers(builder) {
     builder
@@ -37,8 +36,9 @@ export const addPostSlice = createSlice({
         state.loading = true;
       })
       .addCase(addposts.fulfilled, (state, { payload }) => {
-        state.loading = false
-        console.log(payload)
+        state.loading = false;
+        state.reload = !state.reload;
+        console.log(payload);
       })
       .addCase(addposts.rejected, (state) => {
         state.error = true;

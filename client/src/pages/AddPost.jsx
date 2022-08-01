@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addposts } from '../store/addPostSlice';
 
 const FormWrapper = styled.form`
@@ -18,6 +19,14 @@ const FormWrapper = styled.form`
     padding: 0.5rem 1rem;
     width: 100%;
   }
+  .addCatagory {
+    width:100%;
+    padding:7px;
+    margin-top:20px;
+  }
+  .textareaInput {
+    height:250px;
+  }
 
   button {
     margin-left: 0;
@@ -28,24 +37,60 @@ const FormWrapper = styled.form`
 `;
 
 const AddPost = () => {
+  const [title, setTittle] = useState('');
+  const [text, setText] = useState('');
+  const [catagory, setCatagory] = useState('');
   const dispatch = useDispatch();
-  // const userData = useSelector((state) => state.addPost.value);
-  useEffect(() => {
-    dispatch(addposts());
-  }, []);
+  const navigate = useNavigate();
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    dispatch(addposts({ title, text, catagory }));
+    navigate('/');
+  };
+  const handletitleChange = (event) => {
+    setTittle(event.target.value);
+  };
+  const handletextChange = (event) => {
+    setText(event.target.value);
+  };
+  const handlecatagoryChange = (event) => {
+    setCatagory(event.target.value);
+  };
 
   return (
-
     <main>
       <h3>Add Post:</h3>
-      <FormWrapper>
+      <FormWrapper onSubmit={handlesubmit}>
         <div>
-          <input type="text" placeholder="post Tittle Here" />
-          <textarea type="text" placeholder="post text Here" />
-          <input type="text" placeholder="Select catagory" />
+          <input
+            type="text"
+            value={title}
+            onChange={handletitleChange}
+            placeholder="post Tittle Here"
+          />
+          <textarea
+            className="textareaInput"
+            cols="80"
+            row="8"
+            type="text"
+            onChange={handletextChange}
+            value={text}
+            placeholder="post text Here"
+          />
+          <div>
+            <select
+              value={catagory}
+              onChange={handlecatagoryChange}
+              className="addCatagory"
+            >
+              <option>Select Catagory</option>
+              <option>Pirate</option>
+              <option>Cat</option>
+              <option>Hackathon</option>
+            </select>
+          </div>
           <button type="submit">Add post</button>
         </div>
-
       </FormWrapper>
     </main>
   );
