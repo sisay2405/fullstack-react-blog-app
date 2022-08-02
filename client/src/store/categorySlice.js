@@ -50,15 +50,13 @@ export const categorySlice = createSlice({
       })
       .addCase(addCatagory.rejected, (state) => {
         state.error = true;
-      });
-    builder
+      })
       .addCase(getCatagory.pending, (state) => {
         state.loading = true;
       })
       .addCase(getCatagory.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.value = payload;
-        console.log(payload);
       })
       .addCase(getCatagory.rejected, (state) => {
         state.error = true;

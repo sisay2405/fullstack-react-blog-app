@@ -53,8 +53,8 @@ const Post = () => {
       <h2>View Posts:</h2>
       {postsData.length ? (
         <section className="posts">
-          {(postsData.map(({ title, text, author, date }) => (
-            <CardWrapper>
+          {(postsData.map(({ id, title, text, author, date, category }) => (
+            <CardWrapper key={id}>
               <h3>{title}</h3>
               <section>
                 {text.slice(0, 500)}...
