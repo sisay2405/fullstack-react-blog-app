@@ -35,19 +35,25 @@
       "text": "new id post",
       "catagory": "Hackathon",
       "id": 5
+    },
+    {
+      "title": "sisaypost",
+      "text": "sisaynew post",
+      "catagory": "sisermi",
+      "id": 6
     }
   ],
   "category": [
     {
-      "categoryType": "thirdcata",
+      "categoryType": "hackathon",
       "id": 5
     },
     {
-      "categoryType": "adda",
+      "categoryType": "pirate",
       "id": 6
     },
     {
-      "categoryType": "newcat",
+      "categoryType": "cat",
       "id": 7
     },
     {
@@ -73,6 +79,18 @@
     {
       "categoryType": "brandcat",
       "id": 13
+    },
+    {
+      "categoryType": "sisaycategory",
+      "id": 14
+    },
+    {
+      "categoryType": "newAll",
+      "id": 15
+    },
+    {
+      "categoryType": "sisermi",
+      "id": 16
     }
   ]
 }

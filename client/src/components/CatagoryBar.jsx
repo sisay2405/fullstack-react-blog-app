@@ -77,6 +77,7 @@ const CatagoryBar = () => {
       <form onSubmit={handleCategoryChange}>
         <div className="CatagoryInput">
           <select onChange={handleOnChange}>
+            <option value="all">All</option>
             {catgoryData && catgoryData.map((item) => {
               return <option key={item.id}> {item.categoryType}</option>;
             })}

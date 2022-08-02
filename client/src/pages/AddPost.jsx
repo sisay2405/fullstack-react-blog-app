@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addposts } from '../store/addPostSlice';
 
@@ -40,6 +40,7 @@ const AddPost = () => {
   const [title, setTittle] = useState('');
   const [text, setText] = useState('');
   const [catagory, setCatagory] = useState('');
+  const catgoryData = useSelector((state) => state.categories.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handlesubmit = (e) => {
@@ -84,9 +85,9 @@ const AddPost = () => {
               className="addCatagory"
             >
               <option>Select Catagory</option>
-              <option>Pirate</option>
-              <option>Cat</option>
-              <option>Hackathon</option>
+              {catgoryData && catgoryData.map((item) => {
+                return <option key={item.id}> {item.categoryType}</option>;
+              })}
             </select>
           </div>
           <button type="submit">Add post</button>
