@@ -36,5 +36,43 @@
       "catagory": "Hackathon",
       "id": 5
     }
+  ],
+  "category": [
+    {
+      "categoryType": "thirdcata",
+      "id": 5
+    },
+    {
+      "categoryType": "adda",
+      "id": 6
+    },
+    {
+      "categoryType": "newcat",
+      "id": 7
+    },
+    {
+      "categoryType": "newcat",
+      "id": 8
+    },
+    {
+      "categoryType": "newww",
+      "id": 9
+    },
+    {
+      "categoryType": "addednewoone",
+      "id": 10
+    },
+    {
+      "categoryType": "new",
+      "id": 11
+    },
+    {
+      "categoryType": "nn",
+      "id": 12
+    },
+    {
+      "categoryType": "brandcat",
+      "id": 13
+    }
   ]
 }
