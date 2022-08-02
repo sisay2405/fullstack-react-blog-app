@@ -11,6 +11,7 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+//
 export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
   async (category) => {

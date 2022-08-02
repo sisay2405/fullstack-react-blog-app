@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../store/postSlice';
 import { lighten } from '../../utils/styleMethods';
 
@@ -45,16 +46,20 @@ const Catagorywrapperr = styled.footer`
 const Post = () => {
   const postsData = useSelector((state) => state.posts.value);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getPosts());
   }, []);
+  const handleOnClick = (id) => {
+    navigate(`/postDetails/${id}`);
+  };
   return (
     <>
       <h2>View Posts:</h2>
       {postsData.length ? (
         <section className="posts">
           {(postsData.map(({ id, title, text, author, date, category }) => (
-            <CardWrapper key={id}>
+            <CardWrapper key={id} onClick={() => handleOnClick(id)}>
               <h3>{title}</h3>
               <section>
                 {text.slice(0, 500)}...
