@@ -27,52 +27,42 @@
     {
       "title": "programing",
       "text": "Computer programming is the process of performing a particular computation (or more generally, accomplishing a specific computing result), usually by designing and building an executable computer program. Programming involves tasks such as analysis, generating algorithms, profiling algorithms' accuracy and resource consumption, and the implementation of algorithms (usually in a chosen programming language, commonly referred to as coding).[1][2] The source code of a program is written in one or more languages that are intelligible to programmers, rather than machine code, which is directly executed by the central processing unit. The purpose of programming is to find a sequence of instructions that will automate the performance of a task (which can be as complex as an operating system) on a computer, often for solving a given problem. Proficient programming thus usually requires expertise in several different subjects, including knowledge of the application domain, specialized algorithms, and formal logic.",
-      "catagory": "Hackathon",
+      "category": "Hackathon",
       "id": 4
     },
     {
       "title": "Id",
       "text": "new id post",
-      "catagory": "Hackathon",
+      "category": "Hackathon",
       "id": 5
+    },
+    {
+      "title": "ermias ",
+      "text": "hello world",
+      "category": "Ermias",
+      "id": 6
     }
   ],
   "category": [
     {
-      "categoryType": "thirdcata",
-      "id": 5
+      "categoryType": "all",
+      "id": 1
     },
     {
-      "categoryType": "adda",
-      "id": 6
+      "categoryType": "hackathon",
+      "id": 2
     },
     {
-      "categoryType": "newcat",
-      "id": 7
+      "categoryType": "cat",
+      "id": 3
     },
     {
-      "categoryType": "newcat",
+      "categoryType": "pirate",
       "id": 8
     },
     {
-      "categoryType": "newww",
-      "id": 9
-    },
-    {
-      "categoryType": "addednewoone",
+      "categoryType": "Ermias",
       "id": 10
-    },
-    {
-      "categoryType": "new",
-      "id": 11
-    },
-    {
-      "categoryType": "nn",
-      "id": 12
-    },
-    {
-      "categoryType": "brandcat",
-      "id": 13
     }
   ]
 }
