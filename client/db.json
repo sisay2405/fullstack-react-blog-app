@@ -43,15 +43,15 @@
       "id": 6
     },
     {
-      "title": "Sisay Ermies and Franki",
-      "text": "from sisay",
-      "catagory": "sisayER",
+      "title": "Pickachu",
+      "text": "hello world!",
+      "category": "pokemon",
       "id": 7
     },
     {
-      "title": "post sisayFr",
-      "text": "sisayFR",
-      "catagory": "SisayFR",
+      "title": "Betty",
+      "text": "Hello there !",
+      "category": "Betty",
       "id": 8
     }
   ],
@@ -77,11 +77,11 @@
       "id": 10
     },
     {
-      "categoryType": "sisayER",
+      "categoryType": "pokemon",
       "id": 11
     },
     {
-      "categoryType": "SisayFR",
+      "categoryType": "Betty",
       "id": 12
     }
   ]
