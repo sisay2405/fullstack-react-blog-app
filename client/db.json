@@ -41,6 +41,18 @@
       "text": "hello world",
       "category": "Ermias",
       "id": 6
+    },
+    {
+      "title": "Sisay Ermies and Franki",
+      "text": "from sisay",
+      "catagory": "sisayER",
+      "id": 7
+    },
+    {
+      "title": "post sisayFr",
+      "text": "sisayFR",
+      "catagory": "SisayFR",
+      "id": 8
     }
   ],
   "category": [
@@ -63,6 +75,14 @@
     {
       "categoryType": "Ermias",
       "id": 10
+    },
+    {
+      "categoryType": "sisayER",
+      "id": 11
+    },
+    {
+      "categoryType": "SisayFR",
+      "id": 12
     }
   ]
 }
