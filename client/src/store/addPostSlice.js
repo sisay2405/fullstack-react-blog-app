@@ -4,12 +4,12 @@ import axios from 'axios';
 
 export const addposts = createAsyncThunk(
   'addposts',
-  async ({ title, text, catagory }) => {
+  async ({ title, text, category }) => {
     try {
       const posts = await axios.post('http://localhost:3001/posts', {
         title,
         text,
-        catagory,
+        category,
       });
       return posts.data;
     } catch (err) {

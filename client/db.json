@@ -41,6 +41,18 @@
       "text": "hello world",
       "category": "Ermias",
       "id": 6
+    },
+    {
+      "title": "Pickachu",
+      "text": "hello world!",
+      "category": "pokemon",
+      "id": 7
+    },
+    {
+      "title": "Betty",
+      "text": "Hello there !",
+      "category": "Betty",
+      "id": 8
     }
   ],
   "category": [
@@ -63,6 +75,14 @@
     {
       "categoryType": "Ermias",
       "id": 10
+    },
+    {
+      "categoryType": "pokemon",
+      "id": 11
+    },
+    {
+      "categoryType": "Betty",
+      "id": 12
     }
   ]
 }
