@@ -1,31 +1,56 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const urlBase = 'http://localhost:3001';
-
-export const getCatagory = createAsyncThunk(
-  'catagory/getCatagory',
-  async () => {
-    const { data: apiResults } = await axios.get(`${urlBase}/catagories`);
-    console.log('API RESULTS:', apiResults);
-    return apiResults;
+export const addCatagory = createAsyncThunk(
+  'addCatagory',
+  async (categoryType) => {
+    try {
+      const catagories = await axios.post('http://localhost:3001/category', { categoryType });
+      return catagories.data;
+    } catch (err) {
+      console.log(`Error!:${err}`);
+    }
   }
 );
 
+export const getCatagory = createAsyncThunk(
+  'getCatagory',
+  async () => {
+    try {
+      const catagoriesPost = await axios.get('http://localhost:3001/category');
+      return catagoriesPost.data;
+    } catch (err) {
+      console.log(`Error!:${err}`);
+    }
+  }
+);
 export const categorySlice = createSlice({
-  name: 'catagory',
+  name: 'category',
   initialState: {
-    catagory: [],
+    value: '',
+    reload: true,
     loading: false,
     error: false,
   },
+
   reducers: {
-    setCatagory(state, { payload }) {
-      state.catagory = payload;
-    },
   },
+
   extraReducers(builder) {
+    builder
+      .addCase(addCatagory.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addCatagory.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.reload = !state.reload;
+        console.log(payload);
+      })
+      .addCase(addCatagory.rejected, (state) => {
+        state.error = true;
+      });
     builder
       .addCase(getCatagory.pending, (state) => {
         state.loading = true;
@@ -33,6 +58,7 @@ export const categorySlice = createSlice({
       .addCase(getCatagory.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.value = payload;
+        console.log(payload);
       })
       .addCase(getCatagory.rejected, (state) => {
         state.error = true;
@@ -40,6 +66,6 @@ export const categorySlice = createSlice({
   }
 });
 
-export const { setCatagory } = categorySlice.actions;
+export const { setAddCategory } = categorySlice.actions;
 
 export default categorySlice.reducer;

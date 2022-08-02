@@ -35,7 +35,25 @@
       "text": "new id post",
       "catagory": "Hackathon",
       "id": 5
+    },
+    {
+      "title": "Frankie and his Flu!!",
+      "text": "the flu master is here",
+      "catagory": "Frankie",
+      "id": 6
+    }
+  ],
+  "category": [
+   
+    {
+      "categoryType": "Frankie",
+      "id": 17
+    },
+    {
+      "categoryType": "all",
+      "id": 18
     }
     
+   
   ]
 }

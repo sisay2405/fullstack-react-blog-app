@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 import { getPosts, setSelectedCategory } from '../store/postSlice';
+import { addCatagory, getCatagory } from '../store/categorySlice';
 import { lighten } from '../utils/styleMethods';
 
 const Catagorywrapperr = styled.footer`
@@ -45,19 +46,28 @@ width:300px;
 `;
 const CatagoryBar = () => {
   const [selectedCategoryed, setSelectedCategoryed] = useState('all');
-  const postsData = useSelector((state) => state.posts.value);
+  const [addcatago, setAddCatgo] = useState('');
+  const catgoryData = useSelector((state) => state.categories.value);
+  const reload = useSelector((state) => state.categories.reload);
+
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCatagory());
+  }, [reload]);
 
-  // how to use useMemo hook
-  // const filteredList = useMemo(getFilteredList, [selectedCategoryed, postsData]);
-
+  const submitAddCatag = (event) => {
+    event.preventDefault();
+    dispatch(addCatagory(addcatago));
+  };
+  const onChangeAddCatagry = (e) => {
+    setAddCatgo(e.target.value);
+  };
   function handleCategoryChange(event) {
     event.preventDefault();
     dispatch(setSelectedCategory(selectedCategoryed));
   }
 
   const handleOnChange = (e) => {
-    console.log('SISAY SELECTED THIS CATEGORY:', e.target.value);
     setSelectedCategoryed(e.target.value);
   };
 
@@ -67,21 +77,21 @@ const CatagoryBar = () => {
       <form onSubmit={handleCategoryChange}>
         <div className="CatagoryInput">
           <select onChange={handleOnChange}>
-            <option value="all">All</option>
-            <option value="pirate">Pirate</option>
-            <option value="cat">Cat</option>
-            <option value="hackathon">Hackathon</option>
+            {catgoryData && catgoryData.map((item) => {
+              return <option key={item.id}> {item.categoryType}</option>;
+            })}
           </select>
         </div>
         <button type="submit">VIEW CATAGORY POSTS</button>
       </form>
       <h3>ADD A CATEGORY</h3>
-      <form>
+      <form onSubmit={submitAddCatag}>
         <div className="CatagoryInput">
           <input
             type="text"
-            id="searchTerm"
+            value={addcatago}
             placeholder="Catagory Name"
+            onChange={onChangeAddCatagry}
           />
         </div>
         <button type="submit">ADD.. CATAGORY</button>
