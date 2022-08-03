@@ -93,6 +93,10 @@
     {
       "categoryType": "no-virus ",
       "id": 13
+    },
+    {
+      "categoryType": "",
+      "id": 14
     }
   ]
 }
