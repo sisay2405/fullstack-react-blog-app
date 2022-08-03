@@ -47,18 +47,6 @@
       "text": "hello world!",
       "category": "pokemon",
       "id": 7
-    },
-    {
-      "title": "Betty",
-      "text": "Hello there !",
-      "category": "Betty",
-      "id": 8
-    },
-    {
-      "title": "No virus category !!!!",
-      "text": "nothing seen",
-      "category": "no-virus",
-      "id": 9
     }
   ],
   "category": [

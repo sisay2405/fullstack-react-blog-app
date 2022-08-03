@@ -17,6 +17,18 @@ export const addposts = createAsyncThunk(
     }
   }
 );
+export const deltePost = createAsyncThunk(
+  'deltePost',
+  async (id) => {
+    console.log('name', id);
+    try {
+      const posts = await axios.delete(`http://localhost:3001/posts/${id}`);
+      return posts.data;
+    } catch (err) {
+      console.log(`Erorr!:${err}`);
+    }
+  }
+);
 
 export const addPostSlice = createSlice({
   name: 'addposts',
@@ -41,6 +53,16 @@ export const addPostSlice = createSlice({
         console.log(payload);
       })
       .addCase(addposts.rejected, (state) => {
+        state.error = true;
+      })
+      .addCase(deltePost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deltePost.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.reload = !state.reload;
+      })
+      .addCase(deltePost.rejected, (state) => {
         state.error = true;
       });
   }

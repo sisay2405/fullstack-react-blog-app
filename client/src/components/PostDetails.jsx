@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
-import { getDetails, getPosts } from '../store/postSlice';
+import { deltePost } from '../store/addPostSlice';
 import { lighten } from '../utils/styleMethods';
 
 const CardWrapper = styled.article`
@@ -32,6 +32,7 @@ const CardWrapper = styled.article`
     text-decoration: underline;
   }
 `;
+
 const Catagorywrapperr = styled.footer`
   color: #fefefe;
   padding: 1rem 0;
@@ -49,36 +50,35 @@ const Catagorywrapperr = styled.footer`
   }
 `;
 function PostDetails() {
-  const { id } = useParams();
-  const [post, setPost] = useState({});
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const post = useSelector((state) => state.posts.value);
-  // const { details } = useSelector(
-  //   (state) => state.details,
-  //   shallowEqual
-  // );
-  const { title, text, category, author, date } = post;
-  useEffect(() => {
-    getPosts(id)
-      .then(({ data: post }) => setPost(post))
-      .catch((err) => console.log(err));
-  }, [getPosts, id]);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const postDetails = useSelector((state) => state.posts.value);
+  const selectedPost = [...postDetails].filter((post) => {
+    return post.id === +id;
+  });
+  const DeletePost = () => {
+    dispatch(deltePost(id));
+    navigate('/');
+  };
+
   return (
     <>
-      <CardWrapper>
+      { selectedPost && (
+      <CardWrapper key={selectedPost[0].id}>
         <fieldset>
-          <legend style={{ align: 'right', color: 'blue' }}><h4>{category}</h4></legend>
-          <h3>{title}</h3>
-          <div>PostDetails for post id {id} {title}</div>
+          <legend style={{ align: 'right', color: 'blue' }}><h4>{selectedPost[0].category}</h4></legend>
+          <h3>{selectedPost[0].title}</h3>
           <section>
-            {/* {text.slice(0, 500)}... */}
-            {author}
-            {date}
-            <p>Read More from the post &#39;{title}&#39;...</p>
+            {selectedPost[0].text}
+            {selectedPost[0].author}
+            {selectedPost[0].date}
+            <p>Read More from the post &#39;{selectedPost[0].title}&#39;...</p>
           </section>
+          <button type="button" onClick={DeletePost}>Delete post</button>
         </fieldset>
       </CardWrapper>
+      )}
     </>
   );
 }
