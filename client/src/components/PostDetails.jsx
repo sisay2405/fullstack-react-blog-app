@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { deltePost } from '../store/addPostSlice';
+import { deltePost, UpdatePosted } from '../store/addPostSlice';
 import { lighten } from '../utils/styleMethods';
 
 const CardWrapper = styled.article`
@@ -32,7 +32,37 @@ const CardWrapper = styled.article`
     text-decoration: underline;
   }
 `;
+const FormWrapper = styled.form`
+  label {
+    display: block;
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+  }
+  input {
+    margin-bottom: 2rem;
+  }
+  input,
+  textarea {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+  .addCatagory {
+    width:100%;
+    padding:7px;
+    margin-top:20px;
+  }
+  .textareaInput {
+    height:250px;
+  }
 
+  button {
+    margin-left: 0;
+    margin: 2rem 0;
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+`;
 const Catagorywrapperr = styled.footer`
   color: #fefefe;
   padding: 1rem 0;
@@ -50,10 +80,14 @@ const Catagorywrapperr = styled.footer`
   }
 `;
 function PostDetails() {
+  const [title, setTittle] = useState('');
+  const [text, setText] = useState('');
+  const [category, setCategory] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const postDetails = useSelector((state) => state.posts.value);
+  const catgoryData = useSelector((state) => state.categories.value);
   const selectedPost = [...postDetails].filter((post) => {
     return post.id === +id;
   });
@@ -61,21 +95,63 @@ function PostDetails() {
     dispatch(deltePost(id));
     navigate('/');
   };
-
+  useEffect(() => {
+    setTittle(selectedPost[0].title);
+    setText(selectedPost[0].text);
+    setCategory(selectedPost[0].category);
+  }, []);
+  const UpdatePost = (e) => {
+    e.preventDefault();
+    dispatch(UpdatePosted({ id, title, text, category }));
+    navigate('/');
+  };
+  const handletitleChange = (event) => {
+    setTittle(event.target.value);
+  };
+  const handletextChange = (event) => {
+    setText(event.target.value);
+  };
+  const handlecategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
   return (
     <>
       { selectedPost && (
       <CardWrapper key={selectedPost[0].id}>
         <fieldset>
-          <legend style={{ align: 'right', color: 'blue' }}><h4>{selectedPost[0].category}</h4></legend>
-          <h3>{selectedPost[0].title}</h3>
-          <section>
-            {selectedPost[0].text}
-            {selectedPost[0].author}
-            {selectedPost[0].date}
-            <p>Read More from the post &#39;{selectedPost[0].title}&#39;...</p>
-          </section>
-          <button type="button" onClick={DeletePost}>Delete post</button>
+          <FormWrapper onSubmit={UpdatePost}>
+            <div>
+              <input
+                type="text"
+                value={title}
+                onChange={handletitleChange}
+                placeholder="post Tittle Here"
+              />
+              <textarea
+                className="textareaInput"
+                cols="80"
+                row="8"
+                type="text"
+                onChange={handletextChange}
+                value={text}
+                placeholder="post text Here"
+              />
+              <div>
+                <select
+                  value={category}
+                  onChange={handlecategoryChange}
+                  className="addCatagory"
+                >
+                  <option>Select Catagory</option>
+                  {catgoryData && catgoryData.map((item) => {
+                    return <option key={item.id}> {item.categoryType}</option>;
+                  })}
+                </select>
+              </div>
+              <button type="button" onClick={DeletePost}>Delete post</button>
+              <button type="submit">Update post</button>
+            </div>
+          </FormWrapper>
         </fieldset>
       </CardWrapper>
       )}
