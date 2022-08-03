@@ -18,6 +18,11 @@ const CardWrapper = styled.article`
       color: #000099;
     }
   }
+  legend {  
+    background: #7FFF00;
+    margin-left: calc(80% - 35px - 8px);  
+   text-transform: capitalize;  
+     }  
   h3 {
     font-size: 1.5rem;
     margin-top: 0;
@@ -60,13 +65,16 @@ const Post = () => {
         <section className="posts">
           {(postsData.map(({ id, title, text, author, date, category }) => (
             <CardWrapper key={id} onClick={() => handleOnClick(id)}>
-              <h3>{title}</h3>
-              <section>
-                {text.slice(0, 500)}...
-                {author}
-                {date}
-                <p>Read More from the post &#39;{title}&#39;...</p>
-              </section>
+              <fieldset>
+                <legend style={{ align: 'right', color: 'blue' }}><h4>{category}</h4></legend>
+                <h3>{title}</h3>
+                <section>
+                  {text.slice(0, 500)}...
+                  {author}
+                  {date}
+                  <p>Read More from the post &#39;{title}&#39;...</p>
+                </section>
+              </fieldset>
             </CardWrapper>
           )))}
         </section>

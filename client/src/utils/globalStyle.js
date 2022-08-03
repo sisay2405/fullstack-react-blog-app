@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     margin: 0;
+    // min-height: 100vh;
     button {
       cursor: pointer;
       padding: 0.5rem 2rem;

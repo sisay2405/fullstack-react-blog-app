@@ -34,7 +34,7 @@ const Wrapper = styled.div`
 const CatagoryWrapper = styled.div`
 display: flex;
 flex-direction: row;
-height: 100vh;
+// height: 100vh;
 
 `;
 const Layout = () => {
