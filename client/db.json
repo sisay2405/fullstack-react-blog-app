@@ -31,14 +31,8 @@
       "id": 4
     },
     {
-      "title": "Id",
-      "text": "new id post",
-      "category": "Hackathon",
-      "id": 5
-    },
-    {
-      "title": "ermias ",
-      "text": "hello world",
+      "title": "ermies again",
+      "text": "hello Ermies",
       "category": "Ermias",
       "id": 6
     },
@@ -81,6 +75,10 @@
     {
       "categoryType": "no-virus ",
       "id": 13
+    },
+    {
+      "categoryType": "",
+      "id": 14
     }
   ]
 }

@@ -18,8 +18,15 @@ const CardWrapper = styled.article`
       color: #000099;
     }
   }
+  fieldset {  
+    // border: thin solid white;  
+    // margin: 0 auto;  
+    // padding: 2em;  
+    // width: 75%;  
+  }
   legend {  
     background: #7FFF00;
+    // padding: 2px;  
     margin-left: calc(80% - 35px - 8px);  
    text-transform: capitalize;  
      }  

@@ -3,6 +3,15 @@
 import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+export const getDetails = createAsyncThunk(
+  'details/getDetails',
+  async (id) => {
+    const res = await fetch(
+      `http://localhost:3001/posts/${id}`
+    );
+    return res.json();
+  }
+);
 export const getPosts = createAsyncThunk(
   'post/getPosts',
   async () => {
@@ -11,7 +20,6 @@ export const getPosts = createAsyncThunk(
   }
 );
 
-//
 export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
   async (category) => {
@@ -27,6 +35,7 @@ export const PostSlice = createSlice({
     value: [],
     loading: false,
     error: false,
+    details: {},
   },
 
   reducers: {
