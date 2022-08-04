@@ -1,3 +1,4 @@
+const { text } = require('express');
 const mongoose = require('mongoose');
 
 // Each schema maps to a MongoDB collection and defines 
@@ -9,15 +10,15 @@ const postSchema = new mongoose.Schema({
     },
     text: {
         required: true,
-        type: Number
+        type: String
     },
     category: {
         required: true,
-        type: Number
+        type: String
     },
     author: {
         required: false,
-        type: Number
+        type: String
     }
 
 },{
