@@ -25,7 +25,24 @@ router.get('/getAllCategory', async (req, res) => {
 })
 
 // add category 
+router.post('/addCategoryPost', async (req, res) => {
+    const post = new Category({
+        categoryType: req.body.categoryType,
+    })
 
+    try {
+        await post.save()
+        .then(response => {
+            res.status(200).json({
+                success: true,
+                result: response
+            })
+        })
+    }
+    catch (error) {
+        res.status(400).json({message: error.message})
+    }
+})
 
 //Post Method
 router.post('/addPost', async (req, res) => {

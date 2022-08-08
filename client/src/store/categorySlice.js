@@ -8,7 +8,7 @@ export const addCatagory = createAsyncThunk(
   'addCatagory',
   async (categoryType) => {
     try {
-      const catagories = await axios.post('http://localhost:3001/api/category', { categoryType });
+      const catagories = await axios.post('http://localhost:3001/api/addCategoryPost', { categoryType });
       return catagories.data;
     } catch (err) {
       console.log(`Error!:${err}`);
