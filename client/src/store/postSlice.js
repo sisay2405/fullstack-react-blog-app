@@ -28,8 +28,8 @@ export const getPosts = createAsyncThunk(
 export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
   async (category) => {
-    const params = category !== 'all' ? `?category=${category}` : '';
-    const { data: apiResults } = await axios.get(`/posts/${params}`);
+    const params = category !== 'all' ? `category/${category}` : 'getAllPosts';
+    const { data: apiResults } = await axios.get(`http://localhost:3001/api/${params}`);
     return apiResults;
   }
 );
