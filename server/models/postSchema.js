@@ -9,15 +9,15 @@ const postSchema = new mongoose.Schema({
     },
     text: {
         required: true,
-        type: Number
+        type: String
     },
     category: {
         required: true,
-        type: Number
+        type:  String
     },
     author: {
         required: false,
-        type: Number
+        type:  String
     }
 
 },{
