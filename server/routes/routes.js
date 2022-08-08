@@ -28,6 +28,8 @@ router.get('/getAllCategory', async (req, res) => {
     }
 })
 
+// add category 
+
 
 //Post Method
 router.post('/addPost', async (req, res) => {
