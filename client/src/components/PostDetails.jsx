@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -89,7 +90,7 @@ function PostDetails() {
   const postDetails = useSelector((state) => state.posts.value);
   const catgoryData = useSelector((state) => state.categories.value);
   const selectedPost = [...postDetails].filter((post) => {
-    return post.id === +id;
+    return post._id === id;
   });
   const DeletePost = () => {
     dispatch(deltePost(id));
@@ -117,7 +118,7 @@ function PostDetails() {
   return (
     <>
       { selectedPost && (
-      <CardWrapper key={selectedPost[0].id}>
+      <CardWrapper key={selectedPost[0]._id}>
         <fieldset>
           <FormWrapper onSubmit={UpdatePost}>
             <div>

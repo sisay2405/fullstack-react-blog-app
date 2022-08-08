@@ -3,11 +3,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Adding a category (need to add route to backend)
 export const addCatagory = createAsyncThunk(
   'addCatagory',
   async (categoryType) => {
     try {
-      const catagories = await axios.post('http://localhost:3001/category', { categoryType });
+      const catagories = await axios.post('http://localhost:3001/api/category', { categoryType });
       return catagories.data;
     } catch (err) {
       console.log(`Error!:${err}`);
@@ -15,11 +16,12 @@ export const addCatagory = createAsyncThunk(
   }
 );
 
+// Getting all the catagories (works)
 export const getCatagory = createAsyncThunk(
   'getCatagory',
   async () => {
     try {
-      const catagoriesPost = await axios.get('http://localhost:3001/category');
+      const catagoriesPost = await axios.get('http://localhost:3001/api/getAllCategory');
       return catagoriesPost.data;
     } catch (err) {
       console.log(`Error!:${err}`);

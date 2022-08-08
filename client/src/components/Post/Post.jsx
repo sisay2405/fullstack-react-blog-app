@@ -69,8 +69,8 @@ const Post = () => {
       <h2>View Posts:</h2>
       {postsData.length ? (
         <section className="posts">
-          {(postsData.map(({ id, title, text, author, date, category }) => (
-            <CardWrapper key={id} onClick={() => handleOnClick(id)}>
+          {(postsData.map(({ _id, title, text, author, date, category }) => (
+            <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
               <fieldset>
                 <legend style={{ align: 'right', color: 'white', borderRadius: '5px' }}>{category}</legend>
                 <h5>{title}</h5>
