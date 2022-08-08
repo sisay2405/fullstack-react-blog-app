@@ -18,43 +18,42 @@ const CardWrapper = styled.article`
       color: #000099;
     }
   }
-  fieldset {  
-    // border: thin solid white;  
-    // margin: 0 auto;  
-    // padding: 2em;  
-    // width: 75%;  
+  fieldset {   
+    background: white;
   }
   legend {  
-    background: #7FFF00;
-    // padding: 2px;  
-    margin-left: calc(80% - 35px - 8px);  
+    background: #009900;
+    padding: 10px;  
+    margin-left: calc(80% - 3px - 8px);  
    text-transform: capitalize;  
+   font-style: italic;
      }  
-  h3 {
-    font-size: 1.5rem;
+  h5 {
+    font-size: 1.25rem;
     margin-top: 0;
+    color:#2dbeeb;
   }
   p {
     color: #0000ff;
     text-decoration: underline;
   }
 `;
-const Catagorywrapperr = styled.footer`
-  color: #fefefe;
-  padding: 1rem 0;
-  margin-right: 100px;
-  text-align: center;
-  .CatagoryInput{
-    width: 100px;
-  }
-  button {
-    margin: 0.25rem 0;
-    width: 100%;
-  }
-  h3{
-    color:black;
-  }
-`;
+// const Catagorywrapperr = styled.footer`
+//   color: #fefefe;
+//   padding: 1rem 0;
+//   margin-right: 100px;
+//   text-align: center;
+//   .CatagoryInput{
+//     width: 100px;
+//   }
+//   button {
+//     margin: 0.25rem 0;
+//     width: 100%;
+//   }
+//   h3{
+//     color:black;
+//   }
+// `;
 const Post = () => {
   const postsData = useSelector((state) => state.posts.value);
   const dispatch = useDispatch();
@@ -70,16 +69,16 @@ const Post = () => {
       <h2>View Posts:</h2>
       {postsData.length ? (
         <section className="posts">
-          {(postsData.map(({ id, title, text, author, date, category }) => (
-            <CardWrapper key={id} onClick={() => handleOnClick(id)}>
+          {(postsData.map(({ _id, title, text, author, date, category }) => (
+            <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
               <fieldset>
-                <legend style={{ align: 'right', color: 'blue' }}><h4>{category}</h4></legend>
-                <h3>{title}</h3>
+                <legend style={{ align: 'right', color: 'white', borderRadius: '5px' }}>{category}</legend>
+                <h5>{title}</h5>
                 <section>
                   {text.slice(0, 500)}...
-                  {author}
-                  {date}
-                  <p>Read More from the post &#39;{title}&#39;...</p>
+                  <h6>{author}</h6>
+                  <h6>{date}</h6>
+                  <h5>Read More from the post &#39;{title}&#39;...</h5>
                 </section>
               </fieldset>
             </CardWrapper>

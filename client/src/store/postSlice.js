@@ -3,23 +3,28 @@
 import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// get posts by id (works)
 export const getDetails = createAsyncThunk(
   'details/getDetails',
   async (id) => {
     const res = await fetch(
-      `http://localhost:3001/posts/${id}`
+      `/getOne/${id}`
     );
     return res.json();
   }
 );
+
+// Getting all posts (works)
 export const getPosts = createAsyncThunk(
   'post/getPosts',
   async () => {
-    const { data: apiResults } = await axios.get('/posts');
+    const { data: apiResults } = await axios.get('http://localhost:3001/api/getAllPosts');
+    console.log('RESULTS:', apiResults);
     return apiResults;
   }
 );
 
+// need another route or do filtering function in redux
 export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
   async (category) => {

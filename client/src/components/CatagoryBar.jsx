@@ -7,25 +7,28 @@ import { lighten } from '../utils/styleMethods';
 
 const Catagorywrapperr = styled.footer`
   color: #fefefe;
-  padding: 1rem 0;
-  margin-left: 100px;
+  padding: 1rem 5rem;
   text-align: center;
-  .CatagoryInput{
-    width: 400px;
-  }
-  button {
-    margin: 0.25rem 0;
-    width: 300px;
-  }
   h3{
     color:black;
+  }
+  .CatagoryPostButton{
+    color: white;
+    background: #2dbeeb;
+    border-radius: 3px;
+    margin: 0.25rem 0;
+    width: 250px;
+  }
+  .viewCatagoryPost{
+    border-radius: 3px;
+    margin: 0.25rem 0;
+    width: 250px;
   }
 `;
 const CardWrapper = styled.article`
 width:300px;
   border: 1px solid lightgray;
   border-radius: 10px;
-  // margin-bottom: 1rem;
   padding: 1.5rem;
   white-space: pre-line;
   &:hover {
@@ -75,27 +78,28 @@ const CatagoryBar = () => {
     <Catagorywrapperr>
       <h3>VIEW CATEGORY</h3>
       <form onSubmit={handleCategoryChange}>
-        <div className="CatagoryInput">
-          <select onChange={handleOnChange}>
+        <div>
+          <select className="viewCatagoryPost" onChange={handleOnChange}>
             <option value="all">All</option>
             {catgoryData && catgoryData.map((item) => {
               return <option key={item.id}> {item.categoryType}</option>;
             })}
           </select>
         </div>
-        <button type="submit">VIEW CATAGORY POSTS</button>
+        <button className="CatagoryPostButton" type="submit">VIEW CATAGORY POSTS</button>
       </form>
       <h3>ADD A CATEGORY</h3>
       <form onSubmit={submitAddCatag}>
-        <div className="CatagoryInput">
+        <div>
           <input
+            className="viewCatagoryPost"
             type="text"
             value={addcatago}
             placeholder="Catagory Name"
             onChange={onChangeAddCatagry}
           />
         </div>
-        <button type="submit">ADD.. CATAGORY</button>
+        <button className="CatagoryPostButton" type="submit">ADD CATAGORY</button>
       </form>
     </Catagorywrapperr>
   );

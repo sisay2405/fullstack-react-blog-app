@@ -2,11 +2,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// adding a post (works)
 export const addposts = createAsyncThunk(
   'addposts',
   async ({ title, text, category }) => {
     try {
-      const posts = await axios.post('http://localhost:3001/posts', {
+      const posts = await axios.post('http://localhost:3001/api/addPost', {
         title,
         text,
         category,
@@ -17,24 +18,28 @@ export const addposts = createAsyncThunk(
     }
   }
 );
+
+// delete post (works)
 export const deltePost = createAsyncThunk(
   'deltePost',
   async (id) => {
     console.log('name', id);
     try {
-      const posts = await axios.delete(`http://localhost:3001/posts/${id}`);
+      const posts = await axios.delete(`http://localhost:3001/api/deleteId/${id}`);
       return posts.data;
     } catch (err) {
       console.log(`Erorr!:${err}`);
     }
   }
 );
+
+// update post (works)
 export const UpdatePosted = createAsyncThunk(
   'UpdatePosted',
   async ({ id, title, text, category }) => {
     console.log('name', id);
     try {
-      const posts = await axios.put(`http://localhost:3001/posts/${id}`, { title, text, category });
+      const posts = await axios.patch(`http://localhost:3001/api/updatePost/${id}`, { title, text, category });
       return posts.data;
     } catch (err) {
       console.log(`Erorr!:${err}`);
