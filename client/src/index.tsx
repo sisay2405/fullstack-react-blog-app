@@ -5,11 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ErrorBoundary from './ErrorBoundary';
 import App from './App';
-import store from './store';
+import { store } from './store/index';
 
-const root = createRoot(
-  document.getElementById('root')
-);
+const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>

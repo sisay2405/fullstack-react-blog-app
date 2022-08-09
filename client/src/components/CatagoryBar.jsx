@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
@@ -50,8 +52,8 @@ width:300px;
 const CatagoryBar = () => {
   const [selectedCategoryed, setSelectedCategoryed] = useState('all');
   const [addcatago, setAddCatgo] = useState('');
-  const catgoryData = useSelector((state) => state.categories.value);
-  const reload = useSelector((state) => state.categories.reload);
+  const catgoryData = useSelector((state) => state.categories.value, shallowEqual);
+  const reload = useSelector((state) => state.categories.reload, shallowEqual);
 
   const dispatch = useDispatch();
   useEffect(() => {
