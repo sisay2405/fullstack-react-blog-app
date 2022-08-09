@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { deltePost, UpdatePosted } from '../store/addPostSlice';
 import { lighten } from '../utils/styleMethods';
+import { useAppSelector, useAppDispatch } from '../types/hooks'
 
 const CardWrapper = styled.article`
   border: 1px solid lightgray;
@@ -80,20 +81,23 @@ const Catagorywrapperr = styled.footer`
     color:black;
   }
 `;
+type PostParams = {
+  id?:string;
+}
 function PostDetails() {
   const [title, setTittle] = useState('');
   const [text, setText] = useState('');
   const [category, setCategory] = useState('');
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams<PostParams>();
   const dispatch = useDispatch();
-  const postDetails = useSelector((state) => state.posts.value);
-  const catgoryData = useSelector((state) => state.categories.value);
+  const postDetails = useAppSelector((state) => state.posts.value);
+  const catgoryData = useSelector((state:any) => state.categories.value);
   const selectedPost = [...postDetails].filter((post) => {
     return post._id === id;
   });
   const DeletePost = () => {
-    dispatch(deltePost(id));
+    dispatch<any>(deltePost(id || ''));
     navigate('/');
   };
   useEffect(() => {
@@ -101,19 +105,21 @@ function PostDetails() {
     setText(selectedPost[0].text);
     setCategory(selectedPost[0].category);
   }, []);
-  const UpdatePost = (e) => {
+  const UpdatePost = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(UpdatePosted({ id, title, text, category }));
+    dispatch<any>(UpdatePosted({
+      title, text, category, id
+    }));
     navigate('/');
   };
-  const handletitleChange = (event) => {
-    setTittle(event.target.value);
+  const handletitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTittle(e.target.value);
   };
-  const handletextChange = (event) => {
-    setText(event.target.value);
+  const handletextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
   };
-  const handlecategoryChange = (event) => {
-    setCategory(event.target.value);
+  const handlecategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value);
   };
   return (
     <>
@@ -130,11 +136,11 @@ function PostDetails() {
               />
               <textarea
                 className="textareaInput"
-                cols="80"
-                row="8"
-                type="text"
-                onChange={handletextChange}
+                // cols="80"
+                // row="8"
+                // type="text"
                 value={text}
+                onChange={handletextChange}
                 placeholder="post text Here"
               />
               <div>
@@ -144,7 +150,7 @@ function PostDetails() {
                   className="addCatagory"
                 >
                   <option>Select Catagory</option>
-                  {catgoryData && catgoryData.map((item) => {
+                  {catgoryData && catgoryData.map((item: { id:number, categoryType: string}) => {
                     return <option key={item.id}> {item.categoryType}</option>;
                   })}
                 </select>
