@@ -47,12 +47,6 @@ width:300px;
     text-decoration: underline;
   }
 `;
-// type SelectCategoryProps = {
-//   selectedCategories: string;
-//   categoryType: string;
-//   // category: string;
-//   id: number;
-// };
 const CatagoryBar = () => {
   const [selectedCategories, setSelectedCategoryies] = useState('');
   const [addcatago, setAddCatgo] = useState('');
@@ -66,7 +60,7 @@ const CatagoryBar = () => {
 
   const submitAddCategory = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(addCatagory());
+    dispatch<any>(addCatagory(addcatago));
   };
   const onChangeAddCatagry = (e: ChangeEvent<HTMLInputElement>) => {
     setAddCatgo(e.target.value);
