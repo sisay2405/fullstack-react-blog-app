@@ -14,11 +14,7 @@ export type APIResult = {
   id: number;
 }
 const root = createRoot(
-<<<<<<< HEAD
-  document.getElementById('root') as  HTMLElement
-=======
   (document.getElementById('root') as HTMLElement)
->>>>>>> main
 );
 root.render(
   <React.StrictMode>
