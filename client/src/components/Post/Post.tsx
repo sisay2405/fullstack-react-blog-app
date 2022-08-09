@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../types/hooks';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../store/postSlice';
@@ -38,32 +39,27 @@ const CardWrapper = styled.article`
     text-decoration: underline;
   }
 `;
-// const Catagorywrapperr = styled.footer`
-//   color: #fefefe;
-//   padding: 1rem 0;
-//   margin-right: 100px;
-//   text-align: center;
-//   .CatagoryInput{
-//     width: 100px;
-//   }
-//   button {
-//     margin: 0.25rem 0;
-//     width: 100%;
-//   }
-//   h3{
-//     color:black;
-//   }
-// `;
+
+const LegendWrapper = styled.legend`
+  align: 'right'; 
+  color: 'white'; 
+  borderRadius: '5px';
+`;
+
 const Post = () => {
-  const postsData = useSelector((state) => state.posts.value);
-  const dispatch = useDispatch();
+  //In component files, import the pre-typed hooks instead of the standard hooks from React-Redux.
+  const postsData = useAppSelector((state) => state.posts.value);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getPosts());
   }, []);
-  const handleOnClick = (id) => {
+
+  const handleOnClick = (id:string) => {
     navigate(`/postDetails/${id}`);
   };
+
   return (
     <>
       <h2>View Posts:</h2>
@@ -72,7 +68,7 @@ const Post = () => {
           {(postsData.map(({ _id, title, text, author, date, category }) => (
             <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
               <fieldset>
-                <legend style={{ align: 'right', color: 'white', borderRadius: '5px' }}>{category}</legend>
+                <LegendWrapper>{category}</LegendWrapper>
                 <h5>{title}</h5>
                 <section>
                   {text.slice(0, 500)}...

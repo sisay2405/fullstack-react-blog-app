@@ -1,12 +1,26 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable no-param-reassign */
-import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, current, PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
+import { PostResult } from '../types/types';
 import axios from 'axios';
+
+// Define a type for the slice state
+interface PostsState {
+  value:PostResult[];
+  loading: boolean;
+  error: boolean;
+}
+
+// Define the initial state using that type
+const initialState: PostsState = {
+  value: [],
+  loading: false,
+  error: false
+}
 
 // get posts by id (works)
 export const getDetails = createAsyncThunk(
   'details/getDetails',
-  async (id) => {
+  async (id: string) => {
     const res = await fetch(
       `/getOne/${id}`
     );
@@ -19,7 +33,7 @@ export const getPosts = createAsyncThunk(
   'post/getPosts',
   async () => {
     const { data: apiResults } = await axios.get('http://localhost:3001/api/getAllPosts');
-    console.log('RESULTS:', apiResults);
+    // console.log('RESULTS:', apiResults);
     return apiResults;
   }
 );
@@ -27,8 +41,8 @@ export const getPosts = createAsyncThunk(
 // need another route or do filtering function in redux
 export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
-  async (category) => {
-    const params = category !== 'all' ? `category/${category}` : 'getAllPosts';
+  async (category: string) => {
+    const params = (category !== 'all') ? `category/${category}` : 'getAllPosts';
     const { data: apiResults } = await axios.get(`http://localhost:3001/api/${params}`);
     return apiResults;
   }
@@ -36,13 +50,7 @@ export const setSelectedCategory = createAsyncThunk(
 
 export const PostSlice = createSlice({
   name: 'post',
-  initialState: {
-    value: [],
-    loading: false,
-    error: false,
-    details: {},
-  },
-
+  initialState,
   reducers: {
   },
   extraReducers(builder) {
@@ -50,9 +58,9 @@ export const PostSlice = createSlice({
       .addCase(getPosts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getPosts.fulfilled, (state, { payload }) => {
+      .addCase(getPosts.fulfilled, (state, action: PayloadAction<PostResult[]>) => {
         state.loading = false;
-        state.value = payload;
+        state.value = action.payload;
       })
       .addCase(getPosts.rejected, (state) => {
         state.error = true;
@@ -60,13 +68,15 @@ export const PostSlice = createSlice({
       .addCase(setSelectedCategory.pending, (state) => {
         state.loading = true;
       })
-      .addCase(setSelectedCategory.fulfilled, (state, { payload }) => {
+      .addCase(setSelectedCategory.fulfilled, (state, action: PayloadAction<PostResult[]>) => {
         state.loading = false;
-        state.value = payload;
+        state.value = action.payload;
       })
       .addCase(setSelectedCategory.rejected, (state) => {
         state.error = true;
       });
   }
 });
+// Other code such as selectors can use the imported `RootState` type
+export const postData = (state: RootState) => state.posts.value
 export default PostSlice.reducer;

@@ -5,10 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ErrorBoundary from './ErrorBoundary';
 import App from './App';
-import store from './store';
+import {store} from './store';
 
+export type APIResult = {
+  text: string;
+  title: string;
+  category: string;
+  id: number;
+}
 const root = createRoot(
-  document.getElementById('root')
+  (document.getElementById('root') as HTMLElement)
 );
 root.render(
   <React.StrictMode>
