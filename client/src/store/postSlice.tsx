@@ -27,7 +27,7 @@ export const getPosts = createAsyncThunk(
 // need another route or do filtering function in redux
 export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
-  async (category) => {
+  async (category: string) => {
     const params = category !== 'all' ? `category/${category}` : 'getAllPosts';
     const { data: apiResults } = await axios.get(`http://localhost:3001/api/${params}`);
     return apiResults;

@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import React, { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getPosts, setSelectedCategory } from '../store/postSlice';
+import { setSelectedCategory } from '../store/postSlice';
 import { addCatagory, getCatagory } from '../store/categorySlice';
 import { lighten } from '../utils/styleMethods';
 
@@ -47,31 +47,37 @@ width:300px;
     text-decoration: underline;
   }
 `;
+// type SelectCategoryProps = {
+//   selectedCategories: string;
+//   categoryType: string;
+//   // category: string;
+//   id: number;
+// };
 const CatagoryBar = () => {
-  const [selectedCategoryed, setSelectedCategoryed] = useState('all');
+  const [selectedCategories, setSelectedCategoryies] = useState('');
   const [addcatago, setAddCatgo] = useState('');
-  const catgoryData = useSelector((state) => state.categories.value);
-  const reload = useSelector((state) => state.categories.reload);
+  const catgoryData = useSelector((state:any) => state.categories.value);
+  const reload = useSelector((state:any) => state.categories.reload);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCatagory());
+    dispatch<any>(getCatagory());
   }, [reload]);
 
-  const submitAddCatag = (event) => {
-    event.preventDefault();
-    dispatch(addCatagory(addcatago));
+  const submitAddCategory = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch<any>(addCatagory());
   };
-  const onChangeAddCatagry = (e) => {
+  const onChangeAddCatagry = (e: ChangeEvent<HTMLInputElement>) => {
     setAddCatgo(e.target.value);
   };
-  function handleCategoryChange(event) {
-    event.preventDefault();
-    dispatch(setSelectedCategory(selectedCategoryed));
+  function handleCategoryChange(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    dispatch<any>(setSelectedCategory(selectedCategories));
   }
 
-  const handleOnChange = (e) => {
-    setSelectedCategoryed(e.target.value);
+  const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategoryies(e.target.value);
   };
 
   return (
@@ -81,7 +87,7 @@ const CatagoryBar = () => {
         <div>
           <select className="viewCatagoryPost" onChange={handleOnChange}>
             <option value="all">All</option>
-            {catgoryData && catgoryData.map((item) => {
+            {catgoryData && catgoryData.map((item: {id: number, categoryType: string }) => {
               return <option key={item.id}> {item.categoryType}</option>;
             })}
           </select>
@@ -89,7 +95,7 @@ const CatagoryBar = () => {
         <button className="CatagoryPostButton" type="submit">VIEW CATAGORY POSTS</button>
       </form>
       <h3>ADD A CATEGORY</h3>
-      <form onSubmit={submitAddCatag}>
+      <form onSubmit={submitAddCategory}>
         <div>
           <input
             className="viewCatagoryPost"
