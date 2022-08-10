@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+/* eslint no-underscore-dangle: 0 */
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../types/hooks';
 import { addposts } from '../store/addPostSlice';
 
 const FormWrapper = styled.form`
@@ -27,7 +29,6 @@ const FormWrapper = styled.form`
   .textareaInput {
     height:250px;
   }
-
   button {
     margin-left: 0;
     margin: 2rem 0;
@@ -43,23 +44,21 @@ const AddPost = () => {
   // *********************************/
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const catgoryData = useSelector((state) => state.categories.value);
-
-  const handlesubmit = (e) => {
+  const catgoryData = useAppSelector((state) => state.categories.value);
+  const handlesubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addposts({ title, text, category }));
+    dispatch<any>(addposts({ title, text, category }));
     navigate('/');
   };
-  const handletitleChange = (event) => {
-    setTittle(event.target.value);
+  const handletitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTittle(e.target.value);
   };
-  const handletextChange = (event) => {
-    setText(event.target.value);
+  const handletextChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
   };
-  const handlecategoryChange = (event) => {
-    setCategory(event.target.value);
+  const handlecategoryChange = (e:ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value);
   };
-
   return (
     <main>
       <h3>Add Post:</h3>
@@ -73,9 +72,7 @@ const AddPost = () => {
           />
           <textarea
             className="textareaInput"
-            cols="80"
-            row="8"
-            type="text"
+            // type="text"
             onChange={handletextChange}
             value={text}
             placeholder="post text Here"
@@ -88,7 +85,7 @@ const AddPost = () => {
             >
               <option>Select Catagory</option>
               {catgoryData && catgoryData.map((item) => {
-                return <option key={item.id}> {item.categoryType}</option>;
+                return <option key={item._id}> {item.categoryType}</option>;
               })}
             </select>
           </div>
@@ -98,5 +95,4 @@ const AddPost = () => {
     </main>
   );
 };
-
 export default AddPost;

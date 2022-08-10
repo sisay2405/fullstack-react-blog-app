@@ -1,11 +1,12 @@
 /* eslint-disable no-underscore-dangle */
+/* global PostParams, id */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { deltePost, UpdatePosted } from '../store/addPostSlice';
 import { lighten } from '../utils/styleMethods';
-import { useAppSelector, useAppDispatch } from '../types/hooks'
+import { useAppSelector, useAppDispatch } from '../types/hooks';
 
 const CardWrapper = styled.article`
   border: 1px solid lightgray;

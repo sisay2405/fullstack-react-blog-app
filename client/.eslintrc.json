@@ -7,6 +7,13 @@
       "prettier",
       "plugin:prettier/recommended"
     ],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
     "parserOptions": {
       "project": "./tsconfig.json"
     },
@@ -43,17 +50,6 @@
           ]
         }
       ]
-    },
-    "settings": {
-      "import/resolver": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "node": {
-          "moduleDirectory": [
-            "node_modules",
-            "src/"
-          ]
-        }
-      }
     },
     "env": {
       "jest": true
