@@ -1,27 +1,27 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+/* global addPostState, reload, loading, error, CategoryProps, text, title, category, id */
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-interface addPostState{ 
+
+interface addPostState{
   reload:boolean;
   loading:boolean;
   error:boolean;
-  
 }
-const  initialState: addPostState = {
-    reload: false,
-    loading: false,
-    error: false
-}
+
+const initialState: addPostState = {
+  reload: false,
+  loading: false,
+  error: false
+};
 
 type CategoryProps = {
   text: string;
   title: string;
   category: string;
   id?:string;
-  // firstName: string;
-  // lastName: string;
 };
-// adding a post (works)
+
 export const addposts = createAsyncThunk(
   'addposts',
   async ({ title, text, category }:CategoryProps) => {
@@ -38,8 +38,7 @@ export const addposts = createAsyncThunk(
   }
 );
 
-// delete post (works)
-
+// delete post
 export const deltePost = createAsyncThunk(
   'deltePost',
   async (id:string) => {
@@ -77,7 +76,7 @@ export const addPostSlice = createSlice({
       .addCase(addposts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addposts.fulfilled, (state,) => {
+      .addCase(addposts.fulfilled, (state) => {
         state.loading = false;
         state.reload = !state.reload;
         // console.log(payload);

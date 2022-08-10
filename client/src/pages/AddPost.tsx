@@ -2,9 +2,8 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useAppSelector, useAppDispatch } from '../types/hooks';
-import { addposts } from '../store/addPostSlice'; 
+import { addposts } from '../store/addPostSlice';
 
 const FormWrapper = styled.form`
   label {
@@ -29,7 +28,6 @@ const FormWrapper = styled.form`
   .textareaInput {
     height:250px;
   }
-
   button {
     margin-left: 0;
     margin: 2rem 0;
@@ -43,10 +41,9 @@ const AddPost = () => {
   const [text, setText] = useState('');
   const [category, setCategory] = useState('');
   // *********************************/
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const catgoryData = useAppSelector((state) => state.categories.value);
-
   const handlesubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch<any>(addposts({ title, text, category }));
@@ -61,7 +58,6 @@ const AddPost = () => {
   const handlecategoryChange = (e:ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
   };
-
   return (
     <main>
       <h3>Add Post:</h3>
@@ -88,7 +84,7 @@ const AddPost = () => {
             >
               <option>Select Catagory</option>
               {catgoryData && catgoryData.map((item) => {
-                return <option key={item.id}> {item.categoryType}</option>;
+                return <option key={item._id}> {item.categoryType}</option>;
               })}
             </select>
           </div>
@@ -98,5 +94,4 @@ const AddPost = () => {
     </main>
   );
 };
-
 export default AddPost;

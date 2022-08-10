@@ -1,6 +1,8 @@
-import { createSlice, createAsyncThunk, current, PayloadAction } from '@reduxjs/toolkit';
+/* global PostsState, value, loading, error */
+/* eslint no-param-reassign: ["error", { "props": false }] */
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import type { RootState } from '../store';
+import type { RootState } from './index';
 import { PostResult } from '../types/types';
 
 // Define a type for the slice state
