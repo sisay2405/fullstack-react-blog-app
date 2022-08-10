@@ -1,25 +1,28 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
+/* global CategoryState, value, loading, error, reload */
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { CategoryResult } from '../types/types';
 import axios from 'axios';
+import { CategoryResult } from '../types/types';
+
 interface CategoryState {
   value:CategoryResult[];
   loading:boolean;
   error:boolean;
-  reload:boolean; 
+  reload:boolean;
 }
+
 const initialState: CategoryState = {
   value: [],
   reload: true,
   loading: false,
   error: false,
-}
+};
+
 // Adding a category (need to add route to backend)
 export const addCatagory = createAsyncThunk(
   'addCatagory',
   async (categoryType:string) => {
-    console.log("this is the category",categoryType)
     try {
       const catagories = await axios.post('http://localhost:3001/api/addCategoryPost', { categoryType });
       return catagories.data;
@@ -64,7 +67,7 @@ export const categorySlice = createSlice({
       .addCase(getCatagory.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCatagory.fulfilled, (state, action:PayloadAction<CategoryResult[]>) => { 
+      .addCase(getCatagory.fulfilled, (state, action:PayloadAction<CategoryResult[]>) => {
         state.loading = false;
         state.value = action.payload;
       })

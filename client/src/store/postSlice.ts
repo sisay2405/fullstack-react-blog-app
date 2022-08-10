@@ -1,7 +1,9 @@
-import { createSlice, createAsyncThunk, current, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
-import { PostResult } from '../types/types';
+/* global PostsState, value, loading, error */
+/* eslint no-param-reassign: ["error", { "props": false }] */
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import type { RootState } from './index';
+import { PostResult } from '../types/types';
 
 // Define a type for the slice state
 interface PostsState {
@@ -15,7 +17,7 @@ const initialState: PostsState = {
   value: [],
   loading: false,
   error: false
-}
+};
 
 // get posts by id (works)
 export const getDetails = createAsyncThunk(
@@ -78,5 +80,5 @@ export const PostSlice = createSlice({
   }
 });
 // Other code such as selectors can use the imported `RootState` type
-export const postData = (state: RootState) => state.posts.value
+export const postData = (state: RootState) => state.posts.value;
 export default PostSlice.reducer;

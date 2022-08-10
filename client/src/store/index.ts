@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
+/* global RootState, ReturnType, getState, AppDispatch, dispatch */
 import { configureStore } from '@reduxjs/toolkit';
 import postReducer from './postSlice';
 import categoryReducer from './categorySlice';

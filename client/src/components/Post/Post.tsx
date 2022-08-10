@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
-import { useAppSelector, useAppDispatch } from '../../types/hooks';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../types/hooks';
 import { getPosts } from '../../store/postSlice';
 import { lighten } from '../../utils/styleMethods';
 
@@ -47,7 +47,7 @@ const LegendWrapper = styled.legend`
 `;
 
 const Post = () => {
-  //In component files, import the pre-typed hooks instead of the standard hooks from React-Redux.
+  // In component files, import the pre-typed hooks instead of the standard hooks from React-Redux.
   const postsData = useAppSelector((state) => state.posts.value);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
