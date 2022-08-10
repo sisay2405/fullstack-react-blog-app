@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk, current, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 import type { RootState } from '../store';
 import { PostResult } from '../types/types';
-import axios from 'axios';
 
 // Define a type for the slice state
-interface PostsState {
+interface PostsState  {
   value:PostResult[];
   loading: boolean;
   error: boolean;
@@ -15,7 +15,7 @@ const initialState: PostsState = {
   value: [],
   loading: false,
   error: false
-}
+};
 
 // get posts by id (works)
 export const getDetails = createAsyncThunk(
@@ -42,11 +42,7 @@ export const getPosts = createAsyncThunk(
 export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
   async (category: string) => {
-<<<<<<<< HEAD:client/src/store/postSlice.tsx
-    const params = category !== 'all' ? `category/${category}` : 'getAllPosts';
-========
     const params = (category !== 'all') ? `category/${category}` : 'getAllPosts';
->>>>>>>> main:client/src/store/postSlice.ts
     const { data: apiResults } = await axios.get(`http://localhost:3001/api/${params}`);
     return apiResults;
   }
@@ -82,5 +78,5 @@ export const PostSlice = createSlice({
   }
 });
 // Other code such as selectors can use the imported `RootState` type
-export const postData = (state: RootState) => state.posts.value
+export const postData = (state: RootState) => state.posts.value;
 export default PostSlice.reducer;

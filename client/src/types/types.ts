@@ -1,3 +1,5 @@
+import { Key } from "react";
+
 export type PostResult = {
     _id: string;
     title: string;
