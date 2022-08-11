@@ -46,22 +46,22 @@ const AddPost = () => {
   const catgoryData = useAppSelector((state) => state.categories.value);
   const handlesubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(addposts({ title, text, category }));
+    dispatch(addposts({ title, text, category }));
     navigate('/');
   };
   const handletitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTittle(e.target.value);
   };
-  const handletextChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+  const handletextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
-  const handlecategoryChange = (e:ChangeEvent<HTMLSelectElement>) => {
+  const handlecategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
   };
   return (
     <main>
       <h3>Add Post:</h3>
-      <FormWrapper onSubmit={handlesubmit}>
+      <FormWrapper onSubmit={handlesubmit} data-testid="form">
         <div>
           <input
             type="text"
@@ -78,6 +78,7 @@ const AddPost = () => {
           />
           <div>
             <select
+              data-testid="select"
               value={category}
               onChange={handlecategoryChange}
               className="addCatagory"
@@ -88,7 +89,7 @@ const AddPost = () => {
               })}
             </select>
           </div>
-          <button type="submit">Add post</button>
+          <button disabled={!category || !text || !title} type="submit">Add Post</button>
         </div>
       </FormWrapper>
     </main>
