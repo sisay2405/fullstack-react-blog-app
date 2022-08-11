@@ -1,12 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 /* global PostParams, id */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useAppSelector, useAppDispatch } from '../types/hooks';
 import { deltePost, UpdatePosted } from '../store/addPostSlice';
 import { lighten } from '../utils/styleMethods';
-import { useAppSelector, useAppDispatch } from '../types/hooks';
 
 const CardWrapper = styled.article`
   border: 1px solid lightgray;
@@ -91,14 +91,14 @@ function PostDetails() {
   const [category, setCategory] = useState('');
   const navigate = useNavigate();
   const { id } = useParams<PostParams>();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const postDetails = useAppSelector((state) => state.posts.value);
-  const catgoryData = useSelector((state:any) => state.categories.value);
+  const catgoryData = useAppSelector((state) => state.categories.value);
   const selectedPost = [...postDetails].filter((post) => {
     return post._id === id;
   });
   const DeletePost = () => {
-    dispatch<any>(deltePost(id || ''));
+    dispatch(deltePost(id || ''));
     navigate('/');
   };
   useEffect(() => {
@@ -151,8 +151,8 @@ function PostDetails() {
                   className="addCatagory"
                 >
                   <option>Select Catagory</option>
-                  {catgoryData && catgoryData.map((item: { id:number, categoryType: string}) => {
-                    return <option key={item.id}> {item.categoryType}</option>;
+                  {catgoryData && catgoryData.map((item) => {
+                    return <option key={item._id}> {item.categoryType}</option>;
                   })}
                 </select>
               </div>

@@ -1,6 +1,7 @@
+/* eslint no-underscore-dangle: 0 */
 import React, { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useAppSelector, useAppDispatch } from '../types/hooks';
 import { setSelectedCategory } from '../store/postSlice';
 import { addCatagory, getCatagory } from '../store/categorySlice';
 import { lighten } from '../utils/styleMethods';
@@ -56,24 +57,24 @@ width:300px;
 const CatagoryBar = () => {
   const [selectedCategories, setSelectedCategoryies] = useState('');
   const [addcatago, setAddCatgo] = useState('');
-  const catgoryData = useSelector((state:any) => state.categories.value);
-  const reload = useSelector((state:any) => state.categories.reload);
+  const catgoryData = useAppSelector((state) => state.categories.value);
+  const reload = useAppSelector((state) => state.categories.reload);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch<any>(getCatagory());
+    dispatch(getCatagory());
   }, [reload]);
 
   const submitAddCategory = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(addCatagory(addcatago));
+    dispatch(addCatagory(addcatago));
   };
   const onChangeAddCatagry = (e: ChangeEvent<HTMLInputElement>) => {
     setAddCatgo(e.target.value);
   };
   function handleCategoryChange(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch<any>(setSelectedCategory(selectedCategories));
+    dispatch(setSelectedCategory(selectedCategories));
   }
 
   const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -87,8 +88,8 @@ const CatagoryBar = () => {
         <div>
           <select className="viewCatagoryPost" onChange={handleOnChange}>
             <option value="all">All</option>
-            {catgoryData && catgoryData.map((item: {id: number, categoryType: string }) => {
-              return <option key={item.id}> {item.categoryType}</option>;
+            {catgoryData && catgoryData.map((item) => {
+              return <option key={item._id}> {item.categoryType}</option>;
             })}
           </select>
         </div>
