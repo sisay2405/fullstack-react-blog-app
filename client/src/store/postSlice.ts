@@ -6,7 +6,7 @@ import type { RootState } from './index';
 import { PostResult } from '../types/types';
 
 // Define a type for the slice state
-interface PostsState  {
+interface PostsState {
   value:PostResult[];
   loading: boolean;
   error: boolean;
