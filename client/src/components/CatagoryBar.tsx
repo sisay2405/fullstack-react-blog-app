@@ -48,12 +48,6 @@ width:300px;
     text-decoration: underline;
   }
 `;
-// type SelectCategoryProps = {
-//   selectedCategories: string;
-//   categoryType: string;
-//   // category: string;
-//   id: number;
-// };
 const CatagoryBar = () => {
   const [selectedCategories, setSelectedCategoryies] = useState('');
   const [addcatago, setAddCatgo] = useState('');
@@ -86,14 +80,14 @@ const CatagoryBar = () => {
       <h3>VIEW CATEGORY</h3>
       <form onSubmit={handleCategoryChange}>
         <div>
-          <select className="viewCatagoryPost" onChange={handleOnChange}>
+          <select data-testid="selected-element" className="viewCatagoryPost" onChange={handleOnChange}>
             <option value="all">All</option>
             {catgoryData && catgoryData.map((item) => {
               return <option key={item._id}> {item.categoryType}</option>;
             })}
           </select>
         </div>
-        <button className="CatagoryPostButton" type="submit">VIEW CATAGORY POSTS</button>
+        <button data-testid="custom-element" className="CatagoryPostButton" type="submit">VIEW CATAGORY POSTS</button>
       </form>
       <h3>ADD A CATEGORY</h3>
       <form onSubmit={submitAddCategory}>
@@ -102,11 +96,11 @@ const CatagoryBar = () => {
             className="viewCatagoryPost"
             type="text"
             value={addcatago}
-            placeholder="Catagory Name"
+            placeholder="Category Name"
             onChange={onChangeAddCatagry}
           />
         </div>
-        <button className="CatagoryPostButton" type="submit">ADD CATAGORY</button>
+        <button data-testid="custom-button" disabled={!addcatago} className="CatagoryPostButton" type="submit">ADD CATAGORY</button>
       </form>
     </Catagorywrapperr>
   );
