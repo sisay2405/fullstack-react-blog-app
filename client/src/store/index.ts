@@ -8,7 +8,9 @@ import addPostsReducer from './addPostSlice';
 
 // *********** added for testing funtionality ******************** //
 const rootReducer = combineReducers({
-  posts: postReducer
+  posts: postReducer,
+  categories: categoryReducer,
+  addposts: addPostsReducer
 })
 
 
@@ -20,18 +22,20 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
 }
 // ************************************************************** //
 
-export const store = configureStore({
-  reducer: {
-    posts: postReducer,
-    categories: categoryReducer,
-    addposts: addPostsReducer
-  },
-});
+// export const store = configureStore({
+//   reducer: {
+//     posts: postReducer,
+//     categories: categoryReducer,
+//     addposts: addPostsReducer
+//   },
+// });
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+// export type RootState = ReturnType<typeof store.getState>
+// // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+// export type AppDispatch = typeof store.dispatch
 
 // ************added for testing funtionality ***************** //
+export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']
 // ************************************************************ //

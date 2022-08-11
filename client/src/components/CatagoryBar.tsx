@@ -60,6 +60,7 @@ const CatagoryBar = () => {
   const reload = useSelector((state:any) => state.categories.reload);
 
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch<any>(getCatagory());
   }, [reload]);
