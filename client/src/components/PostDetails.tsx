@@ -2,7 +2,6 @@
 /* global PostParams, id */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '../types/hooks';
 import { deltePost, UpdatePosted } from '../store/addPostSlice';
