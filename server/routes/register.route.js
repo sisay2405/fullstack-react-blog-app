@@ -28,15 +28,13 @@ router.post('/', async (req , res) => {
       console.log('error', error)
     }
 
-    const encodedUser = jwt.sign(
-      { 
-        userId: user.insertId,
-        ...req.body
-      },
-      process.env.JWT_KEY
-    );
+    const encodedUser = jwt.sign({
+      exp: Math.floor(Date.now()/1000)+(60*60),
+      data: {...req.body}
+  }, process.env.JWT_KEY);
 
     res.json(encodedUser);
+    
   } catch (err) {
     console.log('err', err)
   }

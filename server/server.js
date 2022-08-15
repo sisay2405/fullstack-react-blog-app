@@ -5,6 +5,8 @@ const cors = require('cors');
 const mongoSTRING = process.env.DATABASE_URL;
 const publicRoutes = require('./routes/public.routes');
 const privateRoutes = require('./routes/private.routes');
+const register = require('./routes/register.route');
+const login = require('./routes/login.route');
 const jwt = require('jsonwebtoken');
 
 mongoose.connect(mongoSTRING)
@@ -22,7 +24,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 //************************************ public endpoints **************************************** // 
-app.use('/api', publicRoutes)
+app.use('/api', publicRoutes);
+// register
+app.use('/register', register);
+// login 
+app.use('/login', login);
 
 //**************************************** JWT Verfication ************************************** //
 // Jwt verification checks to see if there is an authorization header with a valid jwt in it.
@@ -60,7 +66,7 @@ app.use(async function verifyJwt(req, res, next) {
 });
 
 //************************************ public endpoints **************************************** // 
-app.use('/api', publicRoutes)
+app.use('/api', privateRoutes)
 
 
 app.listen(3001, () => {
