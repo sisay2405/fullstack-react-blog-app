@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-import './login.css';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../types/hooks';
+import { userRegister } from '../store/userSlice';
+import './login.css';
 
 const FormWrapper = styled.form`
 text-align: center;
@@ -24,39 +27,34 @@ text-align: center;
   }  
 `;
 function Register() {
-  const [name, setName] = useState('');
+  const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const RegisterData = useAppSelector((state) => state.categories.value);
 
-  // function to update state of name with
-  // value enter by user in form
-  const handleChange = (e) => {
-    setName(e.target.value);
+  const handleChange =(e: ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
   };
-  // function to update state of email with value
-  // enter by user in form
-  const handleEmailChange = (e) => {
+  const handleEmailChange =(e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  // function to update state of password with
-  // value enter by user in form
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange =(e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  // function to update state of confirm password
-  // with value enter by user in form
-  const handleConfPasswordChange = (e) => {
+  const handleConfPasswordChange = (e: ChangeEvent<HTMLInputElement>)=> {
     setConfPassword(e.target.value);
   };
-  // below function will be called when user
-  // click on submit button .
-  const handleSubmit = (e) => {
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (password !== confPassword) {
       console.log('password Not Match');
     } else {
-      console.log('A form was submitted with Name :"' + name +
+      console.log('A form was submitted with Name :"' + username +
       '" and Email :"' + email + '"');
+      dispatch(userRegister({ username, email, password }));
     }
     e.preventDefault();
   };
@@ -70,7 +68,7 @@ function Register() {
             <label>
               Name:
             </label><br />
-            <input type="text" value={name} required onChange={(e) => { handleChange(e); }} /><br />
+            <input type="text" value={username} required onChange={(e) => { handleChange(e); }} /><br />
             <label>
               Email:
             </label><br />
