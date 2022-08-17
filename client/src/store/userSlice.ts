@@ -26,7 +26,7 @@ export const userRegister = createAsyncThunk(
   'userRegister',
   async ({ username, email, password }:userProps) => {
     try {
-      const posts = await axios.post('http://localhost:3001/api/register', {
+      const posts = await axios.post('http://localhost:3001/register', {
         username,
         email,
         password,
@@ -41,7 +41,7 @@ export const userLogin = createAsyncThunk(
   'userLogin',
   async ({username, email }:userProps) => {
     try {
-      const loginPost = await axios.post('http://localhost:3001/api/login', {
+      const loginPost = await axios.post('http://localhost:3001/login', {
         username,
         email,
        

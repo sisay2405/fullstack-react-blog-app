@@ -13,9 +13,9 @@ export type PostResult = {
     categoryType:string;
   };
   export type loginResult = {
-    _id:string;
-    name:string;
-    email:string;
-    password:string;
+    _id?:string;
+    username?:string;
+    email?:string;
+    password?:string;
   };
   
