@@ -1,29 +1,9 @@
-const Post = require('../models/postSchema');
-const Category = require('../models/categorySchema');
+const Post = require('../models/post.model');
+const Category = require('../models/category.model');
 const express = require('express');
 const router = express.Router()
- 
-//Fetches all the posts
-router.get('/getAllPosts', async (req, res) => {
-    try{
-        const data = await Post.find();
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
-//Fetch all categories
-router.get('/getAllCategory', async (req, res) => {
-    try{
-        const data = await Category.find();
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
 
+// ********************************** Private Routes ********************************
 // add category 
 router.post('/addCategoryPost', async (req, res) => {
     const post = new Category({
@@ -66,17 +46,6 @@ router.post('/addPost', async (req, res) => {
     }
 })
 
-//Get by ID Method
-router.get('/getOne/:id', async (req, res) => {
-    try{
-        const data = await Post.findById(req.params.id);
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
-
 //Update by ID Method
 router.patch('/updatePost/:id', async (req, res) => {
     try {
@@ -93,17 +62,6 @@ router.patch('/updatePost/:id', async (req, res) => {
     }
 })
 
-//Filter by category
-router.get('/category/:category', async (req, res) => {
-    try {
-        const categoryName = req.params.category;
-        const result = await Post.find({category: categoryName});
-        res.send(result);
-    }
-    catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-})
 
 //Delete by ID Method
 router.delete('/deleteId/:id', async (req, res) => {
