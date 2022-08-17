@@ -48,7 +48,7 @@ app.use(async function verifyJwt(req, res, next) {
   
     // compare passed in token to saved token
     try {
-      const payload = jwt.verify(token, process.env.JWT_KEY);
+      const payload = jwt.verify(token, process.env.TOKEN_SECRET);
       req.user = payload;
     } catch (err) {
       // token is invalid or is incorrect
