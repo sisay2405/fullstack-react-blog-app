@@ -1,35 +1,35 @@
-/* eslint-disable no-param-reassign */
-/* global addPostState, reload, loading, error, CategoryProps, text, title, category, id */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { loginResult } from '../types/types';
 import axios from 'axios';
 
 interface userState{
   reload:boolean;
   loading:boolean;
   error:boolean;
+  value: loginResult[],
 }
 
 const initialState: userState = {
+  value: [],
   reload: false,
   loading: false,
   error: false
 };
 
-type CategoryProps = {
-  text: string;
-  title: string;
-  category: string;
-  id?:string;
+type userProps = {
+  username: string;
+  password: string;
+  email: string;
 };
 
-export const addposts = createAsyncThunk(
-  'addposts',
-  async ({ title, text, category }:CategoryProps) => {
+export const userRegister = createAsyncThunk(
+  'userRegister',
+  async ({ username, email, password }:userProps) => {
     try {
-      const posts = await axios.post('http://localhost:3001/api/addPost', {
-        title,
-        text,
-        category,
+      const posts = await axios.post('http://localhost:3001/api/register', {
+        username,
+        email,
+        password,
       });
       return posts.data;
     } catch (err) {
@@ -37,73 +37,51 @@ export const addposts = createAsyncThunk(
     }
   }
 );
-
-// delete post
-export const deltePost = createAsyncThunk(
-  'deltePost',
-  async (id:string) => {
-    console.log('name', id);
+export const userLogin = createAsyncThunk(
+  'userLogin',
+  async ({username, email }:userProps) => {
     try {
-      const posts = await axios.delete(`http://localhost:3001/api/deleteId/${id}`);
-      return posts.data;
+      const loginPost = await axios.post('http://localhost:3001/api/login', {
+        username,
+        email,
+       
+      });
+      return loginPost.data;
     } catch (err) {
-      console.log(`Erorr!:${err}`);
+      console.log(`Error!:${err}`);
     }
   }
 );
 
-// update post (works)
-export const UpdatePosted = createAsyncThunk(
-  'UpdatePosted',
-  async ({ id, title, text, category }:CategoryProps) => {
-    console.log('this is the id', id);
-    try {
-      const posts = await axios.patch(`http://localhost:3001/api/updatePost/${id}`, { title, text, category });
-      return posts.data;
-    } catch (err) {
-      console.log(`Erorr!:${err}`);
-    }
-  }
-);
-
-export const addPostSlice = createSlice({
-  name: 'addposts',
+export const userSlice = createSlice({
+  name: 'userSlice',
   initialState,
   reducers: {
   },
   extraReducers(builder) {
     builder
-      .addCase(addposts.pending, (state) => {
+      .addCase(userRegister.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addposts.fulfilled, (state) => {
+      .addCase(userRegister.fulfilled, (state) => {
         state.loading = false;
         state.reload = !state.reload;
         // console.log(payload);
       })
-      .addCase(addposts.rejected, (state) => {
+      .addCase(userRegister.rejected, (state) => {
         state.error = true;
       })
-      .addCase(deltePost.pending, (state) => {
+      .addCase(userLogin.pending, (state) => {
         state.loading = true;
       })
-      .addCase(deltePost.fulfilled, (state, { payload }) => {
+      .addCase(userLogin.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.reload = !state.reload;
       })
-      .addCase(deltePost.rejected, (state) => {
+      .addCase(userLogin.rejected, (state) => {
         state.error = true;
       })
-      .addCase(UpdatePosted.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(UpdatePosted.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.reload = !state.reload;
-      })
-      .addCase(UpdatePosted.rejected, (state) => {
-        state.error = true;
-      });
   }
 });
-export default addPostSlice.reducer;
+
+export default userSlice.reducer;
