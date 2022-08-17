@@ -38,7 +38,9 @@ app.use(async function verifyJwt(req, res, next) {
       throw(401, 'Invalid authorization/request');
     }
   
-    // splitting the sheme and token
+    // Whenever the user wants to access a protected route or resource, the user agent should send the JWT, 
+    // typically in the Authorization header using the Bearer schema
+    // and here we are splitting the scheme and token
     const [scheme, token] = req.headers.authorization.split(' ');
   
     // if scheme is not "Bearer" spit out error
