@@ -33,57 +33,52 @@ function Register() {
   const [confPassword, setConfPassword] = useState('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const RegisterData = useAppSelector((state) => state.categories.value);
 
-  const handleChange =(e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
   };
-  const handleEmailChange =(e: ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  const handlePasswordChange =(e: ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  const handleConfPasswordChange = (e: ChangeEvent<HTMLInputElement>)=> {
+  const handleConfPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setConfPassword(e.target.value);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (password !== confPassword) {
       console.log('password Not Match');
     } else {
       console.log('A form was submitted with Name :"' + username +
-      '" and Email :"' + email + '"');
+        '" and Email :"' + email + '"');
       dispatch(userRegister({ username, email, password }));
     }
-    e.preventDefault();
   };
 
   return (
     <main>
-      <FormWrapper>
-        <header className="App-header">
-          <form onSubmit={(e) => { handleSubmit(e); }}>
-            <h3> Sign-up Form </h3>
-            <label>
-              Name:
-            </label><br />
-            <input type="text" value={username} required onChange={(e) => { handleChange(e); }} /><br />
-            <label>
-              Email:
-            </label><br />
-            <input type="email" value={email} required onChange={(e) => { handleEmailChange(e); }} /><br />
-            <label>
-              Password:
-            </label><br />
-            <input type="password" value={password} required onChange={(e) => { handlePasswordChange(e); }} /><br />
-            <label>
-              Confirm Password:
-            </label><br />
-            <input type="password" value={confPassword} required onChange={(e) => { handleConfPasswordChange(e); }} /><br />
-            <input type="submit" value="Submit" />
-          </form>
-        </header>
+      <FormWrapper onSubmit={handleSubmit}>
+        <h3> Sign-up Form </h3>
+        <label>
+          Name:
+        </label><br />
+        <input type="text" value={username} required onChange={(e) => { handleChange(e); }} /><br />
+        <label>
+          Email:
+        </label><br />
+        <input type="email" value={email} required onChange={(e) => { handleEmailChange(e); }} /><br />
+        <label>
+          Password:
+        </label><br />
+        <input type="password" value={password} required onChange={(e) => { handlePasswordChange(e); }} /><br />
+        <label>
+          Confirm Password:
+        </label><br />
+        <input type="password" value={confPassword} required onChange={(e) => { handleConfPasswordChange(e); }} /><br />
+        <input type="submit" value="Submit" />
       </FormWrapper>
     </main>
   );

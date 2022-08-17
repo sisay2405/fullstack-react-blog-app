@@ -1,6 +1,8 @@
-import React from 'react';
+import userEvent from '@testing-library/user-event';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAppSelector } from '../types/hooks';
 
 const HeaderWrapper = styled.header`
   align-items: center;
@@ -49,6 +51,17 @@ const NavWrapper = styled.nav`
 `;
 
 const Header = () => {
+  const [loggedin, setLoggedin] = useState(false);
+  const user = useAppSelector(state => state.user.value)
+
+  // useEffect(() => {
+  //   if ( typeof user[0].username!== 'undefined') {
+  //     setLoggedin(true)
+  //   }
+  //   else {
+  //     setLoggedin(false)
+  //   }
+  // }, [])
   return (
     <HeaderWrapper>
       <Link to="/">
@@ -62,12 +75,18 @@ const Header = () => {
           <li>
             <NavLink to="/add">Add Post</NavLink>
           </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/register">Sign Up</NavLink>
-          </li>
+
+          {!loggedin ?
+            <>
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li><li>
+                <NavLink to="/register">Sign Up</NavLink>
+              </li>
+            </>
+            :
+            <li>{ user[0]?.username }</li>
+          }
         </ul>
       </NavWrapper>
     </HeaderWrapper>

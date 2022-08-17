@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../types/hooks';
 import { userLogin } from '../store/userSlice';
+
 const FormWrapper = styled.form`
 text-align: center;
   label {
@@ -49,27 +50,25 @@ function Login() {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const RegisterData = useAppSelector((state) => state.categories.value);
-  const handleChange =(e: ChangeEvent<HTMLInputElement>)=> {
-    setUserName(e.target.value);
-  };
+
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  const handlePasswordChange =(e: ChangeEvent<HTMLInputElement>)=> {
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit =(e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (password) {
       console.log('A form was submitted with Name :"' + username +
       '" and Email :"' + email + '"');
-      dispatch( userLogin({
-        email, password,
+      dispatch(userLogin({
+        email,
+        password,
         username
       }));
     }
-    e.preventDefault();
   };
 
   return (
@@ -79,12 +78,13 @@ function Login() {
           <form onSubmit={(e) => { handleSubmit(e); }}>
             <h3> Login Form </h3>
             <label>
-              Name:
+              E-Mail:
             </label><br />
-            <input type="text" value={username} required onChange={(e) => { handleChange(e); }} /><br />
+            <input type="text" value={email} required onChange={handleEmailChange} /><br />
             <label>
               Password:
             </label><br />
+            <input type="text" value={password} required onChange={handlePasswordChange} /><br />
             <input type="submit" value="Submit" />
           </form>
         </header>

@@ -16,7 +16,8 @@ test('should render input element', () => {
   const inputElement = screen.getByPlaceholderText(/post Tittle Here/i);
  expect(inputElement).toBeInTheDocument();
  
-});test('should render a button', () => {
+});
+test('should render a button', () => {
     render(
     <Provider store={store}>
       <BrowserRouter>
