@@ -46,7 +46,6 @@ function Login() {
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [confPassword, setConfPassword] = useState('');
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -60,22 +59,19 @@ function Login() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (password) {
-      console.log('A form was submitted with Name :"' + username +
-      '" and Email :"' + email + '"');
-      dispatch(userLogin({
-        email,
-        password,
-        username
-      }));
-    }
+    
+    dispatch(userLogin({
+      email,
+      password,
+      username
+    }));
+    navigate('/');
+
   };
 
   return (
     <main>
-      <FormWrapper>
-        <header className="App-headerrr">
-          <form onSubmit={(e) => { handleSubmit(e); }}>
+      <FormWrapper onSubmit={ handleSubmit }>
             <h3> Login Form </h3>
             <label>
               E-Mail:
@@ -84,10 +80,8 @@ function Login() {
             <label>
               Password:
             </label><br />
-            <input type="text" value={password} required onChange={handlePasswordChange} /><br />
+            <input type="password" value={password} required onChange={handlePasswordChange} /><br />
             <input type="submit" value="Submit" />
-          </form>
-        </header>
       </FormWrapper>
     </main>
   );

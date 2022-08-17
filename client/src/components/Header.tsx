@@ -51,17 +51,24 @@ const NavWrapper = styled.nav`
 `;
 
 const Header = () => {
-  const [loggedin, setLoggedin] = useState(false);
+  const [loggedIn, setLoggedin] = useState(false);
   const user = useAppSelector(state => state.user.value)
 
-  // useEffect(() => {
-  //   if ( typeof user[0].username!== 'undefined') {
-  //     setLoggedin(true)
-  //   }
-  //   else {
-  //     setLoggedin(false)
-  //   }
-  // }, [])
+  console.log('USER:', user);
+
+  useEffect(() => {
+    if (user == [] ){
+      setLoggedin(false);
+    } 
+    
+    if(user.length > 0) {
+      setLoggedin(true);
+    }
+
+    console.log("END OF USEEFFECT:", loggedIn)
+
+  }, [user])
+  
   return (
     <HeaderWrapper>
       <Link to="/">
@@ -76,7 +83,7 @@ const Header = () => {
             <NavLink to="/add">Add Post</NavLink>
           </li>
 
-          {!loggedin ?
+          {(loggedIn === false) ?
             <>
               <li>
                 <NavLink to="/login">Login</NavLink>
@@ -85,8 +92,12 @@ const Header = () => {
               </li>
             </>
             :
-            <li>{ user[0]?.username }</li>
+            <>
+             <li>{ user[0]?.username }</li>
+              <li>Log Out</li>            
+            </>
           }
+
         </ul>
       </NavWrapper>
     </HeaderWrapper>

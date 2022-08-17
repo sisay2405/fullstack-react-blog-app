@@ -23,8 +23,14 @@ const initialState: CategoryState = {
 export const addCatagory = createAsyncThunk(
   'addCatagory',
   async (categoryType:string) => {
+    const jwt = localStorage.getItem('jwtKey'); 
     try {
-      const catagories = await axios.post('http://localhost:3001/api/addCategoryPost', { categoryType });
+      const catagories = await axios.post('http://localhost:3001/api/addCategoryPost', 
+        { categoryType },
+        { 
+          headers: {Authorization: `Bearer ${jwt}`}
+        }
+      );
       return catagories.data;
     } catch (err) {
       console.log(`Error!:${err}`);

@@ -39,12 +39,11 @@ export const userRegister = createAsyncThunk(
 );
 export const userLogin = createAsyncThunk(
   'userLogin',
-  async ({username, email }:userProps) => {
+  async ({password, email, username }:userProps) => { 
     try {
       const loginPost = await axios.post('http://localhost:3001/login', {
-        username,
-        email,
-       
+        password,
+        email
       });
       return loginPost.data;
     } catch (err) {
@@ -63,10 +62,12 @@ export const userSlice = createSlice({
       .addCase(userRegister.pending, (state) => {
         state.loading = true;
       })
-      .addCase(userRegister.fulfilled, (state) => {
+      .addCase(userRegister.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.reload = !state.reload;
-        // console.log(payload);
+        state.value = payload.result;
+        localStorage.setItem('jwtKey', payload.token );
+        console.log(payload);
       })
       .addCase(userRegister.rejected, (state) => {
         state.error = true;
@@ -77,6 +78,9 @@ export const userSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.reload = !state.reload;
+        state.value = payload.result;
+        localStorage.setItem('jwtKey', payload.token );
+        console.log(payload);
       })
       .addCase(userLogin.rejected, (state) => {
         state.error = true;

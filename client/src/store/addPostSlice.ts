@@ -25,12 +25,18 @@ type CategoryProps = {
 export const addposts = createAsyncThunk(
   'addposts',
   async ({ title, text, category }:CategoryProps) => {
+    const jwt = localStorage.getItem('jwtKey'); 
     try {
-      const posts = await axios.post('http://localhost:3001/api/addPost', {
-        title,
-        text,
-        category,
-      });
+      const posts = await axios.post('http://localhost:3001/api/addPost', 
+        {
+          title,
+          text,
+          category,
+        },
+        { 
+          headers: {Authorization: `Bearer ${jwt}`}
+        }
+      );
       return posts.data;
     } catch (err) {
       console.log(`Erorr!:${err}`);
@@ -42,9 +48,10 @@ export const addposts = createAsyncThunk(
 export const deltePost = createAsyncThunk(
   'deltePost',
   async (id:string) => {
+    const jwt = localStorage.getItem('jwtKey');
     console.log('name', id);
     try {
-      const posts = await axios.delete(`http://localhost:3001/api/deleteId/${id}`);
+      const posts = await axios.delete(`http://localhost:3001/api/deleteId/${id}`, {headers: {Authorization: `Bearer ${jwt}`}});
       return posts.data;
     } catch (err) {
       console.log(`Erorr!:${err}`);
@@ -56,9 +63,16 @@ export const deltePost = createAsyncThunk(
 export const UpdatePosted = createAsyncThunk(
   'UpdatePosted',
   async ({ id, title, text, category }:CategoryProps) => {
-    console.log('this is the id', id);
+    const jwt = localStorage.getItem('jwtKey');
     try {
-      const posts = await axios.patch(`http://localhost:3001/api/updatePost/${id}`, { title, text, category });
+      const posts = await axios.patch(`http://localhost:3001/api/updatePost/${id}`, 
+        { 
+          title, text, category 
+        },
+        { 
+          headers: {Authorization: `Bearer ${jwt}`}
+        }
+      );
       return posts.data;
     } catch (err) {
       console.log(`Erorr!:${err}`);
@@ -79,7 +93,6 @@ export const addPostSlice = createSlice({
       .addCase(addposts.fulfilled, (state) => {
         state.loading = false;
         state.reload = !state.reload;
-        // console.log(payload);
       })
       .addCase(addposts.rejected, (state) => {
         state.error = true;

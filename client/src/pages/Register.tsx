@@ -55,6 +55,7 @@ function Register() {
       console.log('A form was submitted with Name :"' + username +
         '" and Email :"' + email + '"');
       dispatch(userRegister({ username, email, password }));
+      navigate('/')
     }
   };
 
@@ -65,19 +66,19 @@ function Register() {
         <label>
           Name:
         </label><br />
-        <input type="text" value={username} required onChange={(e) => { handleChange(e); }} /><br />
+        <input type="text" value={username} required onChange={handleChange} /><br />
         <label>
           Email:
         </label><br />
-        <input type="email" value={email} required onChange={(e) => { handleEmailChange(e); }} /><br />
+        <input type="email" value={email} required onChange={handleEmailChange} /><br />
         <label>
           Password:
         </label><br />
-        <input type="password" value={password} required onChange={(e) => { handlePasswordChange(e); }} /><br />
+        <input type="password" value={password} required onChange={handlePasswordChange} /><br />
         <label>
           Confirm Password:
         </label><br />
-        <input type="password" value={confPassword} required onChange={(e) => { handleConfPasswordChange(e); }} /><br />
+        <input type="password" value={confPassword} required onChange={handleConfPasswordChange} /><br />
         <input type="submit" value="Submit" />
       </FormWrapper>
     </main>
