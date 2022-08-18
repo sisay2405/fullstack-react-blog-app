@@ -6,11 +6,11 @@ interface userState{
   reload:boolean;
   loading:boolean;
   error:boolean;
-  value: loginResult[],
+  value: loginResult,
 }
 
 const initialState: userState = {
-  value: [],
+  value: {},
   reload: false,
   loading: false,
   error: false
@@ -56,6 +56,10 @@ export const userSlice = createSlice({
   name: 'userSlice',
   initialState,
   reducers: {
+    setLogOut(state) {
+      state.value = {};
+      localStorage.removeItem('jwtKey');
+    }
   },
   extraReducers(builder) {
     builder
@@ -87,5 +91,7 @@ export const userSlice = createSlice({
       })
   }
 });
+
+export const { setLogOut } = userSlice.actions;
 
 export default userSlice.reducer;
