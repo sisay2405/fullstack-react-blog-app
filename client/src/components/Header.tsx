@@ -1,8 +1,10 @@
 import userEvent from '@testing-library/user-event';
-import React, { useEffect, useState } from 'react';
+import React, { MouseEvent, MouseEventHandler, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '../types/hooks';
+import { setLogOut } from '../store/userSlice'; 
+import { useDispatch } from 'react-redux';
 
 const HeaderWrapper = styled.header`
   align-items: center;
@@ -28,6 +30,10 @@ const NavWrapper = styled.nav`
     display: flex;
     list-style-type: none;
   }
+  button:onHover{
+    cursor: pointer;
+    background-color: white;
+  }
   li {
     padding-right: 4.5rem;
     margin: 0.1rem 2rem;
@@ -52,23 +58,24 @@ const NavWrapper = styled.nav`
 
 const Header = () => {
   const [loggedIn, setLoggedin] = useState(false);
-  const user = useAppSelector(state => state.user.value)
-
-  console.log('USER:', user);
+  const user = useAppSelector(state => state.user.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user == [] ){
+    if ( Object.keys(user).length === 0 ){
       setLoggedin(false);
-    } 
-    
-    if(user.length > 0) {
+    } else {
       setLoggedin(true);
     }
 
-    console.log("END OF USEEFFECT:", loggedIn)
-
   }, [user])
   
+  const LogOut = () =>{
+    // call reducer function in slice to logout
+    console.log('CLICKED LOGOUT')
+    dispatch(setLogOut());
+  }
+
   return (
     <HeaderWrapper>
       <Link to="/">
@@ -93,8 +100,8 @@ const Header = () => {
             </>
             :
             <>
-             <li>{ user[0]?.username }</li>
-              <li>Log Out</li>            
+             <li>{ user.username }</li>
+              <li><button onClick={LogOut}>Log Out</button></li>            
             </>
           }
 
