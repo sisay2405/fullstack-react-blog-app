@@ -7,10 +7,14 @@ import { setSelectedCategory } from '../store/postSlice';
 import { addCatagory, getCatagory } from '../store/categorySlice';
 import { lighten } from '../utils/styleMethods';
 
-const Catagorywrapperr = styled.footer`
+const Catagorywrapperr = styled.div`
   color: #fefefe;
   padding: 1rem 5rem;
   text-align: center;
+  position: fixed;
+  top: 6rem; /* Stay at the top */
+  right: 0;
+  overflow-x: hidden;
   h3{
     color:black;
   }

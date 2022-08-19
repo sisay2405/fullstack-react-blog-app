@@ -18,6 +18,9 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 1rem 0.5rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
   & > a {
     color: #fefefe;
     text-decoration: none;
