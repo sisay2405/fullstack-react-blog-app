@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import CatagoryBar from '../CatagoryBar';
 import { useNavigate } from 'react-router-dom';
+import CatagoryBar from '../CatagoryBar';
 import { useAppSelector, useAppDispatch } from '../../types/hooks';
 import { getPosts } from '../../store/postSlice';
 import { lighten } from '../../utils/styleMethods';
@@ -46,7 +46,7 @@ const PostWrapper = styled.div`
   .posts{
     width: 75%;
   }
-`
+`;
 
 const LegendWrapper = styled.legend`
   align: 'right'; 
@@ -89,10 +89,10 @@ const Post = () => {
           )))}
         </div>
       ) : (
-        <div title='section' data-testid='section' className="noPosts">
-          <h2 data-testid='noPost'>
+        <div title="section" data-testid="section" className="noPosts">
+          <h2 data-testid="noPost">
             There are no posts yet. You should{' '}
-            <div data-testid='link'>go add one!</div>{' '}
+            <div data-testid="link">go add one!</div>{' '}
           </h2>
         </div>
       )}
