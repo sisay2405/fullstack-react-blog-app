@@ -81,10 +81,10 @@ const Post = () => {
           )))}
         </section>
       ) : (
-        <section className="noPosts">
-          <h2>
+        <section title='section' data-testid='section' className="noPosts">
+          <h2 data-testid='noPost'>
             There are no posts yet. You should{' '}
-            <div>go add one!</div>{' '}
+            <div data-testid='link'>go add one!</div>{' '}
           </h2>
         </section>
       )}
