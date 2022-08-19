@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../types/hooks';
@@ -13,6 +13,17 @@ const FormWrapper = styled.form`
   }
   input {
     margin-bottom: 2rem;
+  }
+  .CatagoryPostButton:enabled{
+    color: white;
+    background: #2dbeeb;
+    border-radius: 3px;
+    margin: 0.25rem 0;
+  }
+  .CatagoryPostButton:disabled{
+    background: #F8F9F9;  
+    color:black;
+    margin: 8px 0;
   }
   input,
   textarea {
@@ -71,7 +82,6 @@ const AddPost = () => {
           />
           <textarea
             className="textareaInput"
-            // type="text"
             onChange={handletextChange}
             value={text}
             placeholder="post text Here"
@@ -89,7 +99,7 @@ const AddPost = () => {
               })}
             </select>
           </div>
-          <button disabled={!category || !text || !title} type="submit">Add Post</button>
+          <button className="CatagoryPostButton" disabled={!category || !text || !title} type="submit">Add Post</button>
         </div>
       </FormWrapper>
     </main>

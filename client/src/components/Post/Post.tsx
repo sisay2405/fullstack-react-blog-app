@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../types/hooks';
@@ -23,7 +22,7 @@ const CardWrapper = styled.article`
     background: white;
   }
   legend {  
-    background: #009900;
+    background: #2dbeeb;
     padding: 10px;  
     margin-left: calc(80% - 3px - 8px);  
    text-transform: capitalize;  

@@ -5,10 +5,16 @@ import { useAppSelector, useAppDispatch } from '../types/hooks';
 import { setSelectedCategory } from '../store/postSlice';
 import { addCatagory, getCatagory } from '../store/categorySlice';
 import { lighten } from '../utils/styleMethods';
+import { object } from 'prop-types';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const Catagorywrapperr = styled.footer`
+const Catagorywrapperr = styled.div`
+// margin-left: 100px;
+  position: fixed ;
+  right: 0;
+  top: 0;
   color: #fefefe;
-  padding: 1rem 5rem;
+  padding: 10rem 5rem;
   text-align: center;
   h3{
     color:black;
@@ -53,15 +59,23 @@ const CatagoryBar = () => {
   const [addcatago, setAddCatgo] = useState('');
   const catgoryData = useAppSelector((state) => state.categories.value);
   const reload = useAppSelector((state) => state.categories.reload);
-
+  const user = useAppSelector(state => state.user.value);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getCatagory());
   }, [reload]);
 
   const submitAddCategory = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addCatagory(addcatago));
+    if( Object.keys(user).length === 0 ){
+      alert("No user detected please sign in");
+      navigate("/");
+    }
+    else{
+      dispatch(addCatagory(addcatago));
+    }
   };
   const onChangeAddCatagry = (e: ChangeEvent<HTMLInputElement>) => {
     setAddCatgo(e.target.value);

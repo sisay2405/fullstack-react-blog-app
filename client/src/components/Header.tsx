@@ -1,18 +1,24 @@
 import userEvent from '@testing-library/user-event';
-import React, { MouseEvent, MouseEventHandler, useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '../types/hooks';
-import { setLogOut } from '../store/userSlice'; 
+import { setLogOut } from '../store/userSlice';
 import { useDispatch } from 'react-redux';
 
 const HeaderWrapper = styled.header`
+position: fixed;
+top: 0;
+width:100%;
   align-items: center;
-  background-color: #333;
+  background-color: #2dbeeb;
   color: #fefefe;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   & > a {
     color: #fefefe;
     text-decoration: none;
@@ -26,11 +32,23 @@ const HeaderWrapper = styled.header`
 `;
 
 const NavWrapper = styled.nav`
+  .userName {
+    color: black;
+    font-size: 1.25rem;
+    font-weight: 700;
+    &:hover {
+      color: lightgrey;
+    }
+    &.active {
+      color: white;
+      font-style: italic;
+    }
+  }
   ul {
     display: flex;
     list-style-type: none;
   }
-  button:onHover{
+  button:onhover {
     cursor: pointer;
     background-color: white;
   }
@@ -40,9 +58,8 @@ const NavWrapper = styled.nav`
     &:first-child {
       padding-left: 0;
     }
-  }
   a {
-    color: #00e600;
+    color: black;
     font-size: 1.25rem;
     font-weight: 700;
     text-decoration: none;
@@ -50,7 +67,7 @@ const NavWrapper = styled.nav`
       color: lightgrey;
     }
     &.active {
-      color: #009900;
+      color: white;
       font-style: italic;
     }
   }
@@ -58,28 +75,27 @@ const NavWrapper = styled.nav`
 
 const Header = () => {
   const [loggedIn, setLoggedin] = useState(false);
-  const user = useAppSelector(state => state.user.value);
+  const user = useAppSelector((state) => state.user.value);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if ( Object.keys(user).length === 0 ){
+    if (Object.keys(user).length === 0) {
       setLoggedin(false);
     } else {
       setLoggedin(true);
     }
+  }, [user]);
 
-  }, [user])
-  
-  const LogOut = () =>{
+  const LogOut = () => {
     // call reducer function in slice to logout
-    console.log('CLICKED LOGOUT')
+    console.log('CLICKED LOGOUT');
     dispatch(setLogOut());
-  }
+  };
 
   return (
     <HeaderWrapper>
       <Link to="/">
-        <h2>FULL-STACK REACT BLOG</h2>
+        <h2>BLOG APP</h2>
       </Link>
       <NavWrapper>
         <ul>
@@ -90,21 +106,26 @@ const Header = () => {
             <NavLink to="/add">Add Post</NavLink>
           </li>
 
-          {(loggedIn === false) ?
+          {loggedIn === false ? (
             <>
               <li>
                 <NavLink to="/login">Login</NavLink>
-              </li><li>
+              </li>
+              <li>
                 <NavLink to="/register">Sign Up</NavLink>
               </li>
             </>
-            :
+          ) : (
             <>
-             <li>{ user.username }</li>
-              <li><button onClick={LogOut}>Log Out</button></li>            
+              <li className="userName">{user.username}</li>
+              <li>
+                {' '}
+                <div className="userName"  onClick={LogOut}>
+                  Log Out
+                </div>
+              </li>
             </>
-          }
-
+          )}
         </ul>
       </NavWrapper>
     </HeaderWrapper>

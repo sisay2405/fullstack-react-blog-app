@@ -95,8 +95,7 @@ function Login() {
             <label>
               E-Mail:
             </label><br />
-            <input  value={email} required onChange={handleEmailChange} type="email" id="email"
-       pattern=".+@globex\.com"  /><br />
+            <input  value={email} required onChange={handleEmailChange} type="email" /><br />
             <label>
               Password:
             </label><br />
