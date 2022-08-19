@@ -93,12 +93,18 @@ function PostDetails() {
   const dispatch = useAppDispatch();
   const postDetails = useAppSelector((state) => state.posts.value);
   const catgoryData = useAppSelector((state) => state.categories.value);
+  const user = useAppSelector((state) => state.user.value);
   const selectedPost = [...postDetails].filter((post) => {
     return post._id === id;
   });
   const DeletePost = () => {
-    dispatch(deltePost(id || ''));
-    navigate('/');
+    if (Object.keys(user).length === 0) {
+      alert('No user detected please sigin in');
+      navigate('/Register');
+    } else {
+      dispatch(deltePost(id || ''));
+      navigate('/');
+    }
   };
   useEffect(() => {
     setTittle(selectedPost[0].title);
@@ -107,10 +113,15 @@ function PostDetails() {
   }, []);
   const UpdatePost = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(UpdatePosted({
-      title, text, category, id
-    }));
-    navigate('/');
+    if (Object.keys(user).length === 0) {
+      alert('No user detected please sigin in');
+      navigate('/Register');
+    } else {
+      dispatch(UpdatePosted({
+        title, text, category, id
+      }));
+      navigate('/');
+    }
   };
   const handletitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTittle(e.target.value);
