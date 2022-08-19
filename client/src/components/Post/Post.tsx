@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import CatagoryBar from '../CatagoryBar';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../types/hooks';
 import { getPosts } from '../../store/postSlice';
@@ -40,6 +41,13 @@ const CardWrapper = styled.article`
   }
 `;
 
+const PostWrapper = styled.div`
+  display: flex;
+  .posts{
+    width: 75%;
+  }
+`
+
 const LegendWrapper = styled.legend`
   align: 'right'; 
   color: 'white'; 
@@ -61,10 +69,10 @@ const Post = () => {
   };
 
   return (
-    <>
-      <h2>View Posts:</h2>
+    <PostWrapper>
       {postsData.length ? (
-        <section className="posts">
+        <div className="posts">
+          <h2>View Posts:</h2>
           {(postsData.map(({ _id, title, text, author, date, category }) => (
             <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
               <fieldset>
@@ -79,16 +87,17 @@ const Post = () => {
               </fieldset>
             </CardWrapper>
           )))}
-        </section>
+        </div>
       ) : (
-        <section title='section' data-testid='section' className="noPosts">
+        <div title='section' data-testid='section' className="noPosts">
           <h2 data-testid='noPost'>
             There are no posts yet. You should{' '}
             <div data-testid='link'>go add one!</div>{' '}
           </h2>
-        </section>
+        </div>
       )}
-    </>
+      <CatagoryBar />
+    </PostWrapper>
   );
 };
 

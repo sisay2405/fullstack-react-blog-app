@@ -35,6 +35,7 @@ const CatagoryWrapper = styled.div`
 display: flex;
 flex-direction: row;
 // height: 100vh;
+margin-top: 8rem;
 
 `;
 const Layout = () => {
@@ -45,7 +46,7 @@ const Layout = () => {
         <Header />
         <CatagoryWrapper>
           <Outlet />
-          <CatagoryBar />
+          {/* <CatagoryBar /> */}
         </CatagoryWrapper>
         <Footer />
       </Wrapper>
