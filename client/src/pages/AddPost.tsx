@@ -55,10 +55,16 @@ const AddPost = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const catgoryData = useAppSelector((state) => state.categories.value);
+  const user = useAppSelector((state) => state.user.value);
   const handlesubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addposts({ title, text, category }));
-    navigate('/');
+    if (Object.keys(user).length === 0) {
+      alert('No user detected please sigin in');
+      navigate('/Register');
+    } else {
+      dispatch(addposts({ title, text, category }));
+      navigate('/');
+    }
   };
   const handletitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTittle(e.target.value);

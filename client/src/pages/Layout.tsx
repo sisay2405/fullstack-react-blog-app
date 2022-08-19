@@ -16,7 +16,6 @@ const Wrapper = styled.div`
     margin: 0 auto 1.5rem;
     padding: 0 1.5rem 1rem;
     width: 90%;
-    // height: 570px;
     & > div {
       white-space: pre-line;
     }
@@ -36,6 +35,7 @@ const Wrapper = styled.div`
 const CatagoryWrapper = styled.div`
 display: flex;
 flex-direction: row;
+margin-top: 8rem;
 `;
 const Layout = () => {
   return (
@@ -45,7 +45,7 @@ const Layout = () => {
         <Header />
         <CatagoryWrapper>
           <Outlet />
-          <CatagoryBar />
+          {/* <CatagoryBar /> */}
         </CatagoryWrapper>
         <Footer />
       </Wrapper>

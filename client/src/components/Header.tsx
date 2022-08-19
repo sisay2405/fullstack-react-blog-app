@@ -1,13 +1,15 @@
 import userEvent from '@testing-library/user-event';
 import React, {
+  MouseEvent,
+  MouseEventHandler,
   useEffect,
-  useState,
+  useState
 } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useAppSelector } from '../types/hooks';
 import { setLogOut } from '../store/userSlice';
-import { useDispatch } from 'react-redux';
 
 const HeaderWrapper = styled.header`
 position: fixed;
@@ -94,7 +96,7 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <Link to="/">
+      <Link className="userName" to="/">
         <h2>BLOG APP</h2>
       </Link>
       <NavWrapper>
