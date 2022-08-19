@@ -1,6 +1,7 @@
 /* eslint no-underscore-dangle: 0 */
 import React, { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../types/hooks';
 import { setSelectedCategory } from '../store/postSlice';
 import { addCatagory, getCatagory } from '../store/categorySlice';
@@ -51,17 +52,24 @@ width:300px;
 const CatagoryBar = () => {
   const [selectedCategories, setSelectedCategoryies] = useState('');
   const [addcatago, setAddCatgo] = useState('');
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const catgoryData = useAppSelector((state) => state.categories.value);
   const reload = useAppSelector((state) => state.categories.reload);
+  const user = useAppSelector((state) => state.user.value);
 
-  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getCatagory());
   }, [reload]);
 
   const submitAddCategory = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addCatagory(addcatago));
+    if (Object.keys(user).length === 0) {
+      alert('No user detected please sign in');
+      navigate('/Register');
+    } else {
+      dispatch(addCatagory(addcatago));
+    }
   };
   const onChangeAddCatagry = (e: ChangeEvent<HTMLInputElement>) => {
     setAddCatgo(e.target.value);

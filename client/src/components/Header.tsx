@@ -1,10 +1,15 @@
 import userEvent from '@testing-library/user-event';
-import React, { MouseEvent, MouseEventHandler, useEffect, useState } from 'react';
+import React, {
+  MouseEvent,
+  MouseEventHandler,
+  useEffect,
+  useState
+} from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useAppSelector } from '../types/hooks';
-import { setLogOut } from '../store/userSlice'; 
-import { useDispatch } from 'react-redux';
+import { setLogOut } from '../store/userSlice';
 
 const HeaderWrapper = styled.header`
   align-items: center;
@@ -30,7 +35,7 @@ const NavWrapper = styled.nav`
     display: flex;
     list-style-type: none;
   }
-  button:onHover{
+  button:onhover {
     cursor: pointer;
     background-color: white;
   }
@@ -58,23 +63,22 @@ const NavWrapper = styled.nav`
 
 const Header = () => {
   const [loggedIn, setLoggedin] = useState(false);
-  const user = useAppSelector(state => state.user.value);
+  const user = useAppSelector((state) => state.user.value);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if ( Object.keys(user).length === 0 ){
+    if (Object.keys(user).length === 0) {
       setLoggedin(false);
     } else {
       setLoggedin(true);
     }
+  }, [user]);
 
-  }, [user])
-  
-  const LogOut = () =>{
+  const LogOut = () => {
     // call reducer function in slice to logout
-    console.log('CLICKED LOGOUT')
+    console.log('CLICKED LOGOUT');
     dispatch(setLogOut());
-  }
+  };
 
   return (
     <HeaderWrapper>
@@ -90,21 +94,23 @@ const Header = () => {
             <NavLink to="/add">Add Post</NavLink>
           </li>
 
-          {(loggedIn === false) ?
+          {loggedIn === false ? (
             <>
               <li>
                 <NavLink to="/login">Login</NavLink>
-              </li><li>
+              </li>
+              <li>
                 <NavLink to="/register">Sign Up</NavLink>
               </li>
             </>
-            :
+          ) : (
             <>
-             <li>{ user.username }</li>
-              <li><button onClick={LogOut}>Log Out</button></li>            
+              <li>{user.username}</li>
+              <li>
+                <button type="button" onClick={LogOut}>Log Out</button>
+              </li>
             </>
-          }
-
+          )}
         </ul>
       </NavWrapper>
     </HeaderWrapper>
