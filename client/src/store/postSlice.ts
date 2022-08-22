@@ -35,7 +35,6 @@ export const getPosts = createAsyncThunk(
   'post/getPosts',
   async () => {
     const { data: apiResults } = await axios.get('http://localhost:3001/api/getAllPosts');
-    // console.log('RESULTS:', apiResults);
     return apiResults;
   }
 );

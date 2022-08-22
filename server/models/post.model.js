@@ -18,7 +18,11 @@ const postSchema = new mongoose.Schema({
     author: {
         required: false,
         type:  String
-    }
+    },
+    comments: [{
+        required: false,
+        type: String
+    }]
 
 },{
     timestamps: true,
