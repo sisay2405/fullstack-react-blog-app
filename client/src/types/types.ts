@@ -7,6 +7,7 @@ export type PostResult = {
     category: string;
     author?: string;
     date?: string;
+    comments?: [];
   };
   export type CategoryResult = {
     _id:string;

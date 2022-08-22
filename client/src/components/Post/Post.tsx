@@ -5,6 +5,7 @@ import CatagoryBar from '../CatagoryBar';
 import { useAppSelector, useAppDispatch } from '../../types/hooks';
 import { getPosts } from '../../store/postSlice';
 import { lighten } from '../../utils/styleMethods';
+import Comment from '../Comment';
 
 const CardWrapper = styled.article`
   border: 1px solid lightgray;
@@ -72,7 +73,7 @@ const Post = () => {
       {postsData.length ? (
         <div className="posts">
           <h2>View Posts:</h2>
-          {(postsData.map(({ _id, title, text, author, date, category }) => (
+          {(postsData.map(({ _id, title, text, author, date, category, comments }) => (
             <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
               <fieldset>
                 <LegendWrapper>{category}</LegendWrapper>
@@ -83,6 +84,7 @@ const Post = () => {
                   <h6>{date}</h6>
                   <h5>Read More from the post &#39;{title}&#39;...</h5>
                 </section>
+                <Comment comments={comments} />
               </fieldset>
             </CardWrapper>
           )))}
