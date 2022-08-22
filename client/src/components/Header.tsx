@@ -12,15 +12,15 @@ import { useAppSelector } from '../types/hooks';
 import { setLogOut } from '../store/userSlice';
 
 const HeaderWrapper = styled.header`
+position: fixed;
+top: 0;
+width:100%;
   align-items: center;
-  background-color: #333;
+  background-color: #2dbeeb;
   color: #fefefe;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 0.5rem;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  padding: 0.5rem 0.5rem;
   & > a {
     color: #fefefe;
     text-decoration: none;
@@ -34,6 +34,18 @@ const HeaderWrapper = styled.header`
 `;
 
 const NavWrapper = styled.nav`
+  .userName {
+    color: black;
+    font-size: 1.25rem;
+    font-weight: 700;
+    &:hover {
+      color: lightgrey;
+    }
+    &.active {
+      color: white;
+      font-style: italic;
+    }
+  }
   ul {
     display: flex;
     list-style-type: none;
@@ -48,9 +60,8 @@ const NavWrapper = styled.nav`
     &:first-child {
       padding-left: 0;
     }
-  }
   a {
-    color: #00e600;
+    color: black;
     font-size: 1.25rem;
     font-weight: 700;
     text-decoration: none;
@@ -58,7 +69,7 @@ const NavWrapper = styled.nav`
       color: lightgrey;
     }
     &.active {
-      color: #009900;
+      color: white;
       font-style: italic;
     }
   }
@@ -85,8 +96,8 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <Link to="/">
-        <h2>FULL-STACK REACT BLOG</h2>
+      <Link className="userName" to="/">
+        <h2>BLOG APP</h2>
       </Link>
       <NavWrapper>
         <ul>
@@ -108,9 +119,12 @@ const Header = () => {
             </>
           ) : (
             <>
-              <li>{user.username}</li>
+              <li className="userName">{user.username}</li>
               <li>
-                <button type="button" onClick={LogOut}>Log Out</button>
+                {' '}
+                <div className="userName"  onClick={LogOut}>
+                  Log Out
+                </div>
               </li>
             </>
           )}

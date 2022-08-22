@@ -9,7 +9,8 @@ import CatagoryBar from '../components/CatagoryBar';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  // height: 100vh;
+
   main {
     flex: 1;
     margin: 0 auto 1.5rem;
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
       color: blue;
     }
     h2 {
-      color: #009900;
+      color: #2dbeeb;
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 2rem;
@@ -34,9 +35,7 @@ const Wrapper = styled.div`
 const CatagoryWrapper = styled.div`
 display: flex;
 flex-direction: row;
-// height: 100vh;
 margin-top: 8rem;
-
 `;
 const Layout = () => {
   return (

@@ -9,7 +9,7 @@ import { lighten } from '../utils/styleMethods';
 
 const Catagorywrapperr = styled.div`
   color: #fefefe;
-  padding: 1rem 5rem;
+  padding: 10rem 5rem;
   text-align: center;
   position: fixed;
   top: 6rem; /* Stay at the top */
@@ -68,10 +68,11 @@ const CatagoryBar = () => {
 
   const submitAddCategory = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (Object.keys(user).length === 0) {
-      alert('No user detected please sign in');
-      navigate('/Register');
-    } else {
+    if( Object.keys(user).length === 0 ){
+      alert("No user detected please sign in");
+      navigate("/Register");
+    }
+    else{
       dispatch(addCatagory(addcatago));
     }
   };

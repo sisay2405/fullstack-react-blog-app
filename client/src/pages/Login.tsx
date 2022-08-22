@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import './login.css';
+// import { isEmail } from "validator";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../types/hooks';
@@ -69,6 +70,24 @@ function Login() {
 
   };
 
+  // const validEmail = (value: any) => {
+  //   if (!isEmail(value)) {
+  //     return (
+  //       <div className="alert alert-danger" role="alert">
+  //         This is not a valid email.
+  //       </div>
+  //     );
+  //   }
+  // };
+  // const vpassword = (value: string | any[]) => {
+  //   if (value.length < 6 || value.length > 40) {
+  //     return (
+  //       <div className="alert alert-danger" role="alert">
+  //         The password must be between 6 and 40 characters.
+  //       </div>
+  //     );
+  //   }
+  // };
   return (
     <main>
       <FormWrapper onSubmit={ handleSubmit }>
@@ -76,7 +95,7 @@ function Login() {
             <label>
               E-Mail:
             </label><br />
-            <input type="text" value={email} required onChange={handleEmailChange} /><br />
+            <input  value={email} required onChange={handleEmailChange} type="email" /><br />
             <label>
               Password:
             </label><br />
