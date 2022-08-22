@@ -5,6 +5,7 @@ import CatagoryBar from '../CatagoryBar';
 import { useAppSelector, useAppDispatch } from '../../types/hooks';
 import { getPosts } from '../../store/postSlice';
 import { lighten } from '../../utils/styleMethods';
+import Comment from '../Comment';
 
 const CardWrapper = styled.article`
   border: 1px solid lightgray;
@@ -52,7 +53,17 @@ const LegendWrapper = styled.legend`
   color: 'white'; 
   borderRadius: '5px';
 `;
-
+const comments = [
+    {
+      data: 'comment 1',
+    },
+    {
+      data: 'comment 2',
+    },
+    {
+      data: 'comment 3',
+    },
+  ];
 const Post = () => {
   // In component files, import the pre-typed hooks instead of the standard hooks from React-Redux.
   const postsData = useAppSelector((state) => state.posts.value);
@@ -63,7 +74,7 @@ const Post = () => {
     dispatch(getPosts());
   }, []);
 
-  const handleOnClick = (id:string) => {
+  const handleOnClick = (id: string) => {
     navigate(`/postDetails/${id}`);
   };
 
@@ -73,19 +84,24 @@ const Post = () => {
         <div className="posts">
           <h2>View Posts:</h2>
           {(postsData.map(({ _id, title, text, author, date, category }) => (
-            <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
-              <fieldset>
-                <LegendWrapper>{category}</LegendWrapper>
-                <h5>{title}</h5>
-                <section>
-                  {text.slice(0, 500)}...
-                  <h6>{author}</h6>
-                  <h6>{date}</h6>
-                  <h5>Read More from the post &#39;{title}&#39;...</h5>
-                </section>
-              </fieldset>
-            </CardWrapper>
+            <div>
+              <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
+                <fieldset>
+                  <LegendWrapper>{category}</LegendWrapper>
+                  <h5>{title}</h5>
+                  <section>
+                    {text.slice(0, 500)}...
+                    <h6>{author}</h6>
+                    <h6>{date}</h6>
+                    <h5>Read More from the post &#39;{title}&#39;...</h5>
+                  </section>
+                </fieldset>
+                <Comment comments={comments} />
+              </CardWrapper>
+              {/* <Comment /> */}
+            </div>
           )))}
+          {/* <Comment /> */}
         </div>
       ) : (
         <div title="section" data-testid="section" className="noPosts">
