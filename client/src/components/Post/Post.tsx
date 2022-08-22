@@ -83,25 +83,21 @@ const Post = () => {
       {postsData.length ? (
         <div className="posts">
           <h2>View Posts:</h2>
-          {(postsData.map(({ _id, title, text, author, date, category }) => (
-            <div>
-              <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
-                <fieldset>
-                  <LegendWrapper>{category}</LegendWrapper>
-                  <h5>{title}</h5>
-                  <section>
-                    {text.slice(0, 500)}...
-                    <h6>{author}</h6>
-                    <h6>{date}</h6>
-                    <h5>Read More from the post &#39;{title}&#39;...</h5>
-                  </section>
-                </fieldset>
+          {(postsData.map(({ _id, title, text, author, date, category, comments }) => (
+            <CardWrapper key={_id} onClick={() => handleOnClick(_id)}>
+              <fieldset>
+                <LegendWrapper>{category}</LegendWrapper>
+                <h5>{title}</h5>
+                <section>
+                  {text.slice(0, 500)}...
+                  <h6>{author}</h6>
+                  <h6>{date}</h6>
+                  <h5>Read More from the post &#39;{title}&#39;...</h5>
+                </section>
                 <Comment comments={comments} />
-              </CardWrapper>
-              {/* <Comment /> */}
-            </div>
+              </fieldset>
+            </CardWrapper>
           )))}
-          {/* <Comment /> */}
         </div>
       ) : (
         <div title="section" data-testid="section" className="noPosts">
