@@ -6,10 +6,10 @@ import axios from 'axios';
 import { CategoryResult } from '../types/types';
 
 interface CategoryState {
-  value:CategoryResult[];
-  loading:boolean;
-  error:boolean;
-  reload:boolean;
+  value: CategoryResult[];
+  loading: boolean;
+  error: boolean;
+  reload: boolean;
 }
 
 const initialState: CategoryState = {
@@ -22,13 +22,14 @@ const initialState: CategoryState = {
 // Adding a category (need to add route to backend)
 export const addCatagory = createAsyncThunk(
   'addCatagory',
-  async (categoryType:string) => {
-    const jwt = localStorage.getItem('jwtKey'); 
+  async (categoryType: string) => {
+    const jwt = localStorage.getItem('jwtKey');
     try {
-      const catagories = await axios.post('http://localhost:3001/api/addCategoryPost', 
+      const catagories = await axios.post(
+        'http://localhost:3001/api/addCategoryPost',
         { categoryType },
-        { 
-          headers: {Authorization: `Bearer ${jwt}`}
+        {
+          headers: { Authorization: `Bearer ${jwt}` }
         }
       );
       return catagories.data;
@@ -73,7 +74,7 @@ export const categorySlice = createSlice({
       .addCase(getCatagory.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCatagory.fulfilled, (state, action:PayloadAction<CategoryResult[]>) => {
+      .addCase(getCatagory.fulfilled, (state, action: PayloadAction<CategoryResult[]>) => {
         state.loading = false;
         state.value = action.payload;
       })

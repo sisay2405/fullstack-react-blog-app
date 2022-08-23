@@ -12,7 +12,7 @@ export const store = configureStore({
     posts: postReducer,
     categories: categoryReducer,
     addposts: addPostsReducer,
-    user:userReducer
+    user: userReducer
   },
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself

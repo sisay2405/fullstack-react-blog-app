@@ -54,16 +54,16 @@ const LegendWrapper = styled.legend`
   borderRadius: '5px';
 `;
 const comments = [
-    {
-      data: 'comment 1',
-    },
-    {
-      data: 'comment 2',
-    },
-    {
-      data: 'comment 3',
-    },
-  ];
+  {
+    data: 'comment 1',
+  },
+  {
+    data: 'comment 2',
+  },
+  {
+    data: 'comment 3',
+  },
+];
 const Post = () => {
   // In component files, import the pre-typed hooks instead of the standard hooks from React-Redux.
   const postsData = useAppSelector((state) => state.posts.value);

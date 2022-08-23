@@ -3,10 +3,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-interface addPostState{
-  reload:boolean;
-  loading:boolean;
-  error:boolean;
+interface addPostState {
+  reload: boolean;
+  loading: boolean;
+  error: boolean;
 }
 
 const initialState: addPostState = {
@@ -19,22 +19,23 @@ type CategoryProps = {
   text: string;
   title: string;
   category: string;
-  id?:string;
+  id?: string;
 };
 
 export const addposts = createAsyncThunk(
   'addposts',
-  async ({ title, text, category }:CategoryProps) => {
-    const jwt = localStorage.getItem('jwtKey'); 
+  async ({ title, text, category }: CategoryProps) => {
+    const jwt = localStorage.getItem('jwtKey');
     try {
-      const posts = await axios.post('http://localhost:3001/api/addPost', 
+      const posts = await axios.post(
+        'http://localhost:3001/api/addPost',
         {
           title,
           text,
           category,
         },
-        { 
-          headers: {Authorization: `Bearer ${jwt}`}
+        {
+          headers: { Authorization: `Bearer ${jwt}` }
         }
       );
       return posts.data;
@@ -47,11 +48,11 @@ export const addposts = createAsyncThunk(
 // delete post
 export const deltePost = createAsyncThunk(
   'deltePost',
-  async (id:string) => {
+  async (id: string) => {
     const jwt = localStorage.getItem('jwtKey');
     console.log('name', id);
     try {
-      const posts = await axios.delete(`http://localhost:3001/api/deleteId/${id}`, {headers: {Authorization: `Bearer ${jwt}`}});
+      const posts = await axios.delete(`http://localhost:3001/api/deleteId/${id}`, { headers: { Authorization: `Bearer ${jwt}` } });
       return posts.data;
     } catch (err) {
       console.log(`Erorr!:${err}`);
@@ -62,15 +63,16 @@ export const deltePost = createAsyncThunk(
 // update post (works)
 export const UpdatePosted = createAsyncThunk(
   'UpdatePosted',
-  async ({ id, title, text, category }:CategoryProps) => {
+  async ({ id, title, text, category }: CategoryProps) => {
     const jwt = localStorage.getItem('jwtKey');
     try {
-      const posts = await axios.patch(`http://localhost:3001/api/updatePost/${id}`, 
-        { 
-          title, text, category 
+      const posts = await axios.patch(
+        `http://localhost:3001/api/updatePost/${id}`,
+        {
+          title, text, category
         },
-        { 
-          headers: {Authorization: `Bearer ${jwt}`}
+        {
+          headers: { Authorization: `Bearer ${jwt}` }
         }
       );
       return posts.data;

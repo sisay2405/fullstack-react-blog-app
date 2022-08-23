@@ -122,7 +122,7 @@ const Header = () => {
               <li className="userName">{user.username}</li>
               <li>
                 {' '}
-                <div className="userName"  onClick={LogOut}>
+                <div className="userName" onClick={LogOut}>
                   Log Out
                 </div>
               </li>
