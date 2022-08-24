@@ -4,7 +4,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { CategoryResult } from '../types/types';
-
+const webURL = 'https://efs-blog-app.netlify.app/';
 interface CategoryState {
   value: CategoryResult[];
   loading: boolean;
@@ -26,7 +26,7 @@ export const addCatagory = createAsyncThunk(
     const jwt = localStorage.getItem('jwtKey');
     try {
       const catagories = await axios.post(
-        'http://localhost:3001/api/addCategoryPost',
+        `${webURL}/api/addCategoryPost`,
         { categoryType },
         {
           headers: { Authorization: `Bearer ${jwt}` }
@@ -44,7 +44,7 @@ export const getCatagory = createAsyncThunk(
   'getCatagory',
   async () => {
     try {
-      const catagoriesPost = await axios.get('http://localhost:3001/api/getAllCategory');
+      const catagoriesPost = await axios.get(`${webURL}/api/getAllCategory`);
       return catagoriesPost.data;
     } catch (err) {
       console.log(`Error!:${err}`);

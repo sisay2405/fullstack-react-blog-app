@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { RootState } from './index';
 import { PostResult } from '../types/types';
-
+const webURL = 'https://efs-blog-app.netlify.app/';
 // Define a type for the slice state
 interface PostsState {
   value:PostResult[];
@@ -34,7 +34,7 @@ export const getDetails = createAsyncThunk(
 export const getPosts = createAsyncThunk(
   'post/getPosts',
   async () => {
-    const { data: apiResults } = await axios.get('http://localhost:3001/api/getAllPosts');
+    const { data: apiResults } = await axios.get(`${webURL}/api/getAllPosts`);
     return apiResults;
   }
 );
@@ -44,7 +44,7 @@ export const setSelectedCategory = createAsyncThunk(
   'post/filterPosts',
   async (category: string) => {
     const params = (category !== 'all') ? `category/${category}` : 'getAllPosts';
-    const { data: apiResults } = await axios.get(`http://localhost:3001/api/${params}`);
+    const { data: apiResults } = await axios.get(`${webURL}/api/${params}`);
     return apiResults;
   }
 );

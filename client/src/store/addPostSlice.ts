@@ -8,7 +8,7 @@ interface addPostState {
   loading: boolean;
   error: boolean;
 }
-
+const webURL = 'https://efs-blog-app.netlify.app/';
 const initialState: addPostState = {
   reload: false,
   loading: false,
@@ -28,7 +28,7 @@ export const addposts = createAsyncThunk(
     const jwt = localStorage.getItem('jwtKey');
     try {
       const posts = await axios.post(
-        'http://localhost:3001/api/addPost',
+        `${webURL}/api/addPost`,
         {
           title,
           text,
@@ -52,7 +52,7 @@ export const deltePost = createAsyncThunk(
     const jwt = localStorage.getItem('jwtKey');
     console.log('name', id);
     try {
-      const posts = await axios.delete(`http://localhost:3001/api/deleteId/${id}`, { headers: { Authorization: `Bearer ${jwt}` } });
+      const posts = await axios.delete(`${webURL}/api/deleteId/${id}`, { headers: { Authorization: `Bearer ${jwt}` } });
       return posts.data;
     } catch (err) {
       console.log(`Erorr!:${err}`);
@@ -67,7 +67,7 @@ export const UpdatePosted = createAsyncThunk(
     const jwt = localStorage.getItem('jwtKey');
     try {
       const posts = await axios.patch(
-        `http://localhost:3001/api/updatePost/${id}`,
+        `${webURL}/api/updatePost/${id}`,
         {
           title, text, category
         },

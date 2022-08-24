@@ -6,6 +6,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { loginResult } from '../types/types';
 
+const webURL = 'https://efs-blog-app.netlify.app/';
 interface userState {
   reload: boolean;
   loading: boolean;
@@ -30,7 +31,7 @@ export const userRegister = createAsyncThunk(
   'userRegister',
   async ({ username, email, password }: userProps) => {
     try {
-      const posts = await axios.post('http://localhost:3001/register', {
+      const posts = await axios.post(`${webURL}/register`, {
         username,
         email,
         password,
@@ -45,7 +46,7 @@ export const userLogin = createAsyncThunk(
   'userLogin',
   async ({ password, email, username }: userProps) => {
     try {
-      const loginPost = await axios.post('http://localhost:3001/login', {
+      const loginPost = await axios.post(`${webURL}/login`, {
         password,
         email
       });
