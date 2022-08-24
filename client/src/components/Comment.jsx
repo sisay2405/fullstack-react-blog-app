@@ -1,5 +1,5 @@
 /* eslint-disable function-paren-newline */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const Comment = ({ comments }) => {
   console.log(comments);

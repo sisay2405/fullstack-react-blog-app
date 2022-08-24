@@ -55,7 +55,7 @@ function Register() {
       console.log('A form was submitted with Name :"' + username +
         '" and Email :"' + email + '"');
       dispatch(userRegister({ username, email, password }));
-      navigate('/')
+      navigate('/');
     }
   };
 

@@ -5,11 +5,12 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { CategoryResult } from '../types/types';
 
+const webURL = 'https://sef-bloq-app.herokuapp.com';
 interface CategoryState {
-  value:CategoryResult[];
-  loading:boolean;
-  error:boolean;
-  reload:boolean;
+  value: CategoryResult[];
+  loading: boolean;
+  error: boolean;
+  reload: boolean;
 }
 
 const initialState: CategoryState = {
@@ -22,13 +23,14 @@ const initialState: CategoryState = {
 // Adding a category (need to add route to backend)
 export const addCatagory = createAsyncThunk(
   'addCatagory',
-  async (categoryType:string) => {
-    const jwt = localStorage.getItem('jwtKey'); 
+  async (categoryType: string) => {
+    const jwt = localStorage.getItem('jwtKey');
     try {
-      const catagories = await axios.post('http://localhost:3001/api/addCategoryPost', 
+      const catagories = await axios.post(
+        `${webURL}/api/addCategoryPost`,
         { categoryType },
-        { 
-          headers: {Authorization: `Bearer ${jwt}`}
+        {
+          headers: { Authorization: `Bearer ${jwt}` }
         }
       );
       return catagories.data;
@@ -43,7 +45,7 @@ export const getCatagory = createAsyncThunk(
   'getCatagory',
   async () => {
     try {
-      const catagoriesPost = await axios.get('http://localhost:3001/api/getAllCategory');
+      const catagoriesPost = await axios.get(`${webURL}/api/getAllCategory`);
       return catagoriesPost.data;
     } catch (err) {
       console.log(`Error!:${err}`);
@@ -73,7 +75,7 @@ export const categorySlice = createSlice({
       .addCase(getCatagory.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCatagory.fulfilled, (state, action:PayloadAction<CategoryResult[]>) => {
+      .addCase(getCatagory.fulfilled, (state, action: PayloadAction<CategoryResult[]>) => {
         state.loading = false;
         state.value = action.payload;
       })

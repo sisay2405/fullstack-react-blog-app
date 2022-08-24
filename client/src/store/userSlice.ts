@@ -1,11 +1,16 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
+/* global CategoryState, value, loading, error, reload,
+userState, userProps, username, password, email  */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginResult } from '../types/types';
 import axios from 'axios';
+import { loginResult } from '../types/types';
 
-interface userState{
-  reload:boolean;
-  loading:boolean;
-  error:boolean;
+const webURL = 'https://sef-bloq-app.herokuapp.com';
+interface userState {
+  reload: boolean;
+  loading: boolean;
+  error: boolean;
   value: loginResult,
 }
 
@@ -24,9 +29,9 @@ type userProps = {
 
 export const userRegister = createAsyncThunk(
   'userRegister',
-  async ({ username, email, password }:userProps) => {
+  async ({ username, email, password }: userProps) => {
     try {
-      const posts = await axios.post('http://localhost:3001/register', {
+      const posts = await axios.post(`${webURL}/register`, {
         username,
         email,
         password,
@@ -39,9 +44,9 @@ export const userRegister = createAsyncThunk(
 );
 export const userLogin = createAsyncThunk(
   'userLogin',
-  async ({password, email, username }:userProps) => { 
+  async ({ password, email, username }: userProps) => {
     try {
-      const loginPost = await axios.post('http://localhost:3001/login', {
+      const loginPost = await axios.post(`${webURL}/login`, {
         password,
         email
       });
@@ -70,7 +75,7 @@ export const userSlice = createSlice({
         state.loading = false;
         state.reload = !state.reload;
         state.value = payload.result;
-        localStorage.setItem('jwtKey', payload.token );
+        localStorage.setItem('jwtKey', payload.token);
         console.log(payload);
       })
       .addCase(userRegister.rejected, (state) => {
@@ -83,12 +88,12 @@ export const userSlice = createSlice({
         state.loading = false;
         state.reload = !state.reload;
         state.value = payload.result;
-        localStorage.setItem('jwtKey', payload.token );
+        localStorage.setItem('jwtKey', payload.token);
         console.log(payload);
       })
       .addCase(userLogin.rejected, (state) => {
         state.error = true;
-      })
+      });
   }
 });
 

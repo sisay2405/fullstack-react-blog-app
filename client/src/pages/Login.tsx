@@ -60,47 +60,28 @@ function Login() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     dispatch(userLogin({
       email,
       password,
       username
     }));
     navigate('/');
-
   };
 
-  // const validEmail = (value: any) => {
-  //   if (!isEmail(value)) {
-  //     return (
-  //       <div className="alert alert-danger" role="alert">
-  //         This is not a valid email.
-  //       </div>
-  //     );
-  //   }
-  // };
-  // const vpassword = (value: string | any[]) => {
-  //   if (value.length < 6 || value.length > 40) {
-  //     return (
-  //       <div className="alert alert-danger" role="alert">
-  //         The password must be between 6 and 40 characters.
-  //       </div>
-  //     );
-  //   }
-  // };
   return (
     <main>
-      <FormWrapper onSubmit={ handleSubmit }>
-            <h3> Login Form </h3>
-            <label>
-              E-Mail:
-            </label><br />
-            <input  value={email} required onChange={handleEmailChange} type="email" /><br />
-            <label>
-              Password:
-            </label><br />
-            <input type="password" value={password} required onChange={handlePasswordChange} /><br />
-            <input type="submit" value="Submit" />
+      <FormWrapper onSubmit={handleSubmit}>
+        <h3> Login Form </h3>
+        <label>
+          E-Mail:
+        </label><br />
+        <input value={email} required onChange={handleEmailChange} type="email" /><br />
+        <label>
+          Password:
+        </label><br />
+        <input type="password" value={password} required onChange={handlePasswordChange} /><br />
+        <input type="submit" value="Submit" />
       </FormWrapper>
     </main>
   );

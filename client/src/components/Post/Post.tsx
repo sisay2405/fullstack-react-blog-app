@@ -53,18 +53,29 @@ const LegendWrapper = styled.legend`
   color: 'white'; 
   borderRadius: '5px';
 `;
-
+const comments = [
+  {
+    data: 'comment 1',
+  },
+  {
+    data: 'comment 2',
+  },
+  {
+    data: 'comment 3',
+  },
+];
 const Post = () => {
   // In component files, import the pre-typed hooks instead of the standard hooks from React-Redux.
   const postsData = useAppSelector((state) => state.posts.value);
+  const reload = useAppSelector((state) => state.addposts.reload);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, []);
+  }, [reload]);
 
-  const handleOnClick = (id:string) => {
+  const handleOnClick = (id: string) => {
     navigate(`/postDetails/${id}`);
   };
 

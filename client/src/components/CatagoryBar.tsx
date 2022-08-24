@@ -68,11 +68,10 @@ const CatagoryBar = () => {
 
   const submitAddCategory = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if( Object.keys(user).length === 0 ){
-      alert("No user detected please sign in");
-      navigate("/Register");
-    }
-    else{
+    if (Object.keys(user).length === 0) {
+      alert('No user detected please sign in');
+      navigate('/Register');
+    } else {
       dispatch(addCatagory(addcatago));
     }
   };
