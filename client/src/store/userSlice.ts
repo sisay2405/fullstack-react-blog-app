@@ -6,7 +6,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { loginResult } from '../types/types';
 
-const webURL = 'https://sef-bloq-app.herokuapp.com/';
+const webURL = 'https://sef-bloq-app.herokuapp.com';
 interface userState {
   reload: boolean;
   loading: boolean;

@@ -5,7 +5,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { CategoryResult } from '../types/types';
 
-const webURL = 'https://sef-bloq-app.herokuapp.com/';
+const webURL = 'https://sef-bloq-app.herokuapp.com';
 interface CategoryState {
   value: CategoryResult[];
   loading: boolean;
