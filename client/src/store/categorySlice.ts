@@ -4,6 +4,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { CategoryResult } from '../types/types';
+
 const webURL = 'https://efs-blog-app.netlify.app/';
 interface CategoryState {
   value: CategoryResult[];
