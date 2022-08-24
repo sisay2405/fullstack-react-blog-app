@@ -8,7 +8,7 @@ interface addPostState {
   loading: boolean;
   error: boolean;
 }
-const webURL = 'https://efs-blog-app.netlify.app/';
+const webURL = 'https://sef-bloq-app.herokuapp.com/';
 const initialState: addPostState = {
   reload: false,
   loading: false,

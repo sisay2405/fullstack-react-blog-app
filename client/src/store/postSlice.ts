@@ -5,7 +5,7 @@ import axios from 'axios';
 import type { RootState } from './index';
 import { PostResult } from '../types/types';
 
-const webURL = 'https://efs-blog-app.netlify.app/';
+const webURL = 'https://sef-bloq-app.herokuapp.com/';
 // Define a type for the slice state
 interface PostsState {
   value:PostResult[];
