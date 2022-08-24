@@ -67,12 +67,13 @@ const comments = [
 const Post = () => {
   // In component files, import the pre-typed hooks instead of the standard hooks from React-Redux.
   const postsData = useAppSelector((state) => state.posts.value);
+  const reload = useAppSelector((state) => state.addposts.reload);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, []);
+  }, [reload]);
 
   const handleOnClick = (id: string) => {
     navigate(`/postDetails/${id}`);
