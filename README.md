@@ -1,6 +1,6 @@
 
 <!-- PROJECT Header -->
-<br />
+<a id="top"></a>
 <div align="center">
 
   <h3 align="center">Fullstack Blog Application</h3>
@@ -48,7 +48,7 @@ Apply the TypeScript static typing system. try to use TypeScript for the majorit
 
 Use the `BLANK_README.md` to get started.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<a  align="right" href="#top">Back to top</a>
 
 
 
@@ -69,7 +69,7 @@ A few of the frameworks/libraries that were used to build the project are:
 * EsLint and AirBnb
 * json server
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<a  align="right" href="#top">Back to top</a>
 
 ### wireframe
   ### Getting Started The App build out with simple wireframes using Figma.
@@ -119,7 +119,7 @@ _Below is an example of how you can instruct your audience on installing and set
    npm start 
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<a  align="right" href="#top">Back to top</a>
 
 
 
@@ -139,7 +139,7 @@ Can be used to post your create your own blog web app and share it with your com
     - [x] To add categories you will need to sign in/sign up
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<a  align="right" href="#top">Back to top</a>
 
 
 
@@ -152,4 +152,4 @@ Frankie Avina - favina@alphaworks.tech
 
 Project Link: [https://github.com/sisay2405/fullstack-react-blog-app]https://github.com/sisay2405/fullstack-react-blog-app
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<a  align="right" href="#top">Back to top</a>
